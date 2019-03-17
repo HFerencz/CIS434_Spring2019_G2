@@ -1,6 +1,8 @@
 import java.awt.*;
+import java.text.ParseException;
 import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 
 @SuppressWarnings("serial")
 public final class View extends JFrame{ 
@@ -11,21 +13,31 @@ public final class View extends JFrame{
 	 CardLayout cardLayout = new CardLayout();
 	 JPanel cardPanel = new JPanel(cardLayout);
 	 JPanel gamePanel = new displayPanel();
+	 JPanel gameOverPanel = new displayPanel();
 	 JPanel startPanel = new displayPanel();
 	 JPanel bestOfPanel = new displayPanel();
 	
-	 JButton versusPlayerButton, versusCompButton, bestOf3Button, bestOf5Button;
+	 JButton versusPlayerButton, versusCompButton, bestOf3Button, bestOf5Button, customRangeButton, customSelectButton;
 	 JButton nextGameButton = new JButton("Next Game");
-	 JButton mainMenuButton = new JButton("Main Menu");
+	 JButton gameOverButton = new JButton("Game Over");
+	 JButton mainMenuButton = new JButton("MAIN MENU");
+	 JButton playAgainButton = new JButton("PLAY AGAIN");
+	 JButton compFirstButton = new JButton("Computer Plays First");
+	 JButton compSecondButton = new JButton("Computer Plays Second");
 	 
 	 JLabel player1Wins = new JLabel("Wins: ");
 	 JLabel player2Wins = new JLabel("Wins: ");
 	 JLabel winnerLabel = new JLabel();
+	 JLabel gameOverLabel = new JLabel("GAME OVER");
+	 JLabel gameWinnerLabel = new JLabel();
+	 
+	 JFormattedTextField gameInputField;
 	 
 	 private final int BOARD_LINES = 4, MAX_TOKENS = 9;
 	 
 	 private ArrayList<Shape> board = new ArrayList<Shape>(BOARD_LINES);
 	 private ArrayList<Shape> tokens = new ArrayList<Shape>(MAX_TOKENS);
+
 
 	 
 	 	//default constructor
@@ -40,12 +52,14 @@ public final class View extends JFrame{
 			createStartScreen();
 			createBestOfScreen();
 			createGameScreen();
+			createGameOverScreen();
 			
 			
 	        
 	        cardPanel.add(startPanel, "1");
 	        cardPanel.add(bestOfPanel, "2");
 			cardPanel.add(gamePanel,"3");
+			cardPanel.add(gameOverPanel, "4");
 			cardLayout.show(cardPanel, "1");
 			
 			
@@ -85,11 +99,19 @@ public final class View extends JFrame{
 			/*Add buttons to the display:
 			 * 	versusPlayerButton: Button for if the opponent is a human player
 			 *  versusComputerButton: Button for if the opponent is the computer
+			 *  compFirstButton: If pressed, computer makes the first move
+			 *  compSecondButton: If pressed, computer makes the second move
 			 */
 			versusPlayerButton = new JButton("Play versus player");
 	        versusPlayerButton.setEnabled(true);
 	        versusCompButton = new JButton("Play versus computer");
 	        versusCompButton.setEnabled(true);
+	        
+	        compFirstButton.setVisible(false);
+	        compFirstButton.setEnabled(false);
+	        compSecondButton.setVisible(false);
+	        compSecondButton.setEnabled(false);
+	        
 			
 			
 			//Set up the button layout
@@ -99,9 +121,11 @@ public final class View extends JFrame{
 			c.ipady = 80;
 			c.ipadx = 80;
 			startButtonPanel.add(versusPlayerButton, c);
+			startButtonPanel.add(compFirstButton,c);
 			c.insets = new Insets(50,0,0,0);
 			c.ipadx = 60;
 			startButtonPanel.add(versusCompButton,c);
+			startButtonPanel.add(compSecondButton,c);
 			
 			//Add the title and buttons to the panel
 			startPanel.add(startTextPanel);
@@ -135,22 +159,68 @@ public final class View extends JFrame{
 			/*Add buttons to the display:
 			 * 	bestOf3Button: Players compete in a best of 3 match
 			 *  bestOf5Button: Players compete in a best of 5 match
+			 *  customRangeButton: Allow user to decide the number of matches
+			 *  customSelectButton: Verify the custom number of matches the user has provided
 			 */
 			bestOf3Button = new JButton("Best Of 3");
 		    bestOf3Button.setEnabled(true);
 		    bestOf5Button = new JButton("Best Of 5");
 			bestOf5Button.setEnabled(true);	
-					
+			customRangeButton = new JButton("Custom Range");
+			customRangeButton.setEnabled(true);
+			customSelectButton = new JButton("ENTER");
+			customSelectButton.setVisible(false);
+			customSelectButton.setEnabled(false);
+			
+			/*
+			 * Formatted text field for if the user decides to choose the number of games to play
+			 */
+		    MaskFormatter formatter = null;
+		    
+			try {
+				formatter = new MaskFormatter("*****");
+			} catch (ParseException e) {
+				
+				e.printStackTrace();
+			}
+			formatter.setValidCharacters("123456789");
+			formatter.setPlaceholderCharacter(' ');
+		
+			gameInputField = new JFormattedTextField(formatter);
+			gameInputField.setPreferredSize(new Dimension(150,100));
+			gameInputField.setFont(new Font("Times New Roman", Font.BOLD, 30));
+			gameInputField.setHorizontalAlignment(JTextField.CENTER);
+			gameInputField.setVisible(false);
+			gameInputField.setEditable(false);
+			gameInputField.setFocusLostBehavior(JFormattedTextField.PERSIST);
+			
+
 			//Set up the button layout
 			GridBagConstraints c = new GridBagConstraints();
-			c.anchor = GridBagConstraints.CENTER;
+			c.anchor = GridBagConstraints.NORTH;
 			c.gridx = 2;
 			c.ipady = 80;
 			c.ipadx = 80;
+			c.insets = new Insets(100,0,0,0);
 			startButtonPanel.add(bestOf3Button, c);
-			c.insets = new Insets(50,0,0,0);
+			c.insets = new Insets(80,0,0,0);
 			c.ipadx = 80;
 			startButtonPanel.add(bestOf5Button,c);
+			c.insets = new Insets(80,0,0,0);
+			c.ipadx = 50;
+			startButtonPanel.add(customRangeButton,c);
+			
+			//Set up input field layout
+			c.anchor = GridBagConstraints.CENTER;
+			c.ipadx = 20;
+			c.ipady = 20;
+			c.insets = new Insets(0,-200,0,0);
+			startButtonPanel.add(gameInputField,c);
+			c.ipadx = 80;
+			c.ipady = 93;
+			c.insets = new Insets(-120,200,0,0);
+			startButtonPanel.add(customSelectButton,c);
+			
 					
 			//Add the title and buttons to the panel
 			bestOfPanel.add(startTextPanel);
@@ -208,9 +278,60 @@ public final class View extends JFrame{
 			nextGameButton.setEnabled(false);
 			nextGameButton.setVisible(false);
 			gamePanel.add(nextGameButton,c);
-			mainMenuButton.setEnabled(false);
-			mainMenuButton.setVisible(false);
-			gamePanel.add(mainMenuButton,c);
+			gameOverButton.setEnabled(false);
+			gameOverButton.setVisible(false);
+			gamePanel.add(gameOverButton,c);
+		}
+		
+		
+		//Create panel for the game over  game
+		public void createGameOverScreen() {
+			
+			//Inner panels for displaying the text and buttons
+			JPanel gameOverTextPanel = new JPanel(new GridBagLayout());
+		    JPanel gameOverButtonPanel = new JPanel(new GridBagLayout());
+			
+			//Assign dimensions to the panel
+			gameOverPanel.setPreferredSize(new Dimension(this.maxX, this.maxY));
+			gameOverPanel.setMaximumSize(new Dimension(this.maxX, this.maxY));
+			gameOverPanel.setMinimumSize(new Dimension(this.maxX, this.maxY));	
+			gameOverPanel.setLayout(new BoxLayout(gameOverPanel, BoxLayout.Y_AXIS));
+			GridBagConstraints c = new GridBagConstraints();
+			
+			c.anchor = GridBagConstraints.NORTH;
+			c.gridx = 0;
+		    c.gridy = 0;
+		    c.insets = new Insets(0,10,0,0);
+		    c.weightx = 1.0;
+		    c.weighty = 1.0;
+		  
+			gameOverLabel.setFont(new Font("Courier New", Font.BOLD, 72));
+			gameOverTextPanel.add(gameOverLabel,c);
+			
+			c.insets = new Insets(100, 0, 0, 0);
+			gameWinnerLabel.setFont(new Font("Courier New", Font.BOLD, 60));
+			gameOverTextPanel.add(gameWinnerLabel,c);
+			
+			playAgainButton.setVisible(true);
+			playAgainButton.setEnabled(true);
+			mainMenuButton.setVisible(true);
+			mainMenuButton.setEnabled(true);
+			
+			//Set up the button layout
+			c.gridx = 2;
+			c.ipady = 80;
+			c.ipadx = 100;
+			c.insets = new Insets(50,0,0,0);
+			gameOverButtonPanel.add(playAgainButton, c);
+			c.insets = new Insets(200,0,0,0);
+			c.ipadx = 100;
+			gameOverButtonPanel.add(mainMenuButton,c);
+			
+			//Add the title and buttons to the panel
+			gameOverPanel.add(gameOverTextPanel);
+			gameOverPanel.add(gameOverButtonPanel);
+			
+					
 		}
 		
 		//Function that returns the ArrayList holding the shapes that form the board

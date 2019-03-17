@@ -17,10 +17,10 @@ public class Model {
 	
 	private int CURRENT_PLAYER = 1;
 	private int TURNS = 0;
-	private int BEST_OF = 0, BEST_OF_3 = 3, BEST_OF_5 = 5, GAMES = 0;
+	private int BEST_OF = 0, GAMES = 0;
 	private int PLAYER_1_WINS = 0, PLAYER_2_WINS = 0;
 	
-	private boolean isComputer = false, winner = false;
+	private boolean isComputer = false, isComputerFirst = false, winner = false;
 	private boolean isContainedArray[] = new boolean[MAX_SHAPES];
 	private Character tokenArray[][] = new Character[ROWS][COLS];
 	
@@ -370,9 +370,7 @@ public class Model {
 		
 		for(int i = 0; i < ROWS; i++) {
 			if(tokenArray[i][0] == tokenArray[i][1] && tokenArray[i][1] == tokenArray[i][2] && tokenArray[i][0] != null) 
-				return true;
-			
-						
+				return true;				
 		}
 		return false;
 	}
@@ -395,39 +393,37 @@ public class Model {
 		return false;
 	}
 	
-	public boolean gameOverEvent(JButton mainMenuButton) {
-		if(GAMES == BEST_OF) {
-			if(PLAYER_1_WINS > PLAYER_2_WINS)
-				mainMenuButton.setText("PLAYER 1 WINS");
-			else if(PLAYER_1_WINS < PLAYER_2_WINS)
-				mainMenuButton.setText("PLAYER 2 WINS");
+	public boolean gameOverEvent(JLabel gameWinnerLabel) {
+			if(PLAYER_1_WINS > BEST_OF/2)
+				gameWinnerLabel.setText("PLAYER 1 WINS");
+			else if(PLAYER_2_WINS > BEST_OF/2)
+				gameWinnerLabel.setText("PLAYER 2 WINS");
+			else if(GAMES == BEST_OF)
+				gameWinnerLabel.setText("TIE!");
 			else
-				mainMenuButton.setText("TIE!");
-			return true;
-		}
-			
-		return false;
+				return false;
+			return true;	
 	}
+			
+		
 	
-	public void gameReset(ArrayList<Shape> tokens, JButton gameResetButton, JButton mainMenuButton, JLabel winnerLabel, 
-			JLabel player1Wins, JLabel player2Wins) {
+	public void gameReset(ArrayList<Shape> tokens, ArrayList<Shape> board, JButton gameResetButton, JButton gameOverButton, 
+			JLabel winnerLabel, JLabel gameWinnerLabel, JLabel player1Wins, JLabel player2Wins) {
 		CURRENT_PLAYER = 1;
 		TURNS = 0;
 		tokens.removeAll(tokens);
 		isContainedArray = new boolean[MAX_SHAPES];
 	    tokenArray = new Character[ROWS][COLS];
 	    winner = false;
-	    if(GAMES == BEST_OF) {
-	    	mainMenuButton.setEnabled(false);
-	    	mainMenuButton.setVisible(false);
+	    if(gameOverEvent(gameWinnerLabel)) {
+	    	gameOverButton.setEnabled(false);
+	    	gameOverButton.setVisible(false);
 	    	player1Wins.setText("Wins: ");
 	 	    player2Wins.setText("Wins: ");
 	    	GAMES = 0;
-	    	BEST_OF = 0;
 	    	PLAYER_1_WINS = 0;
 	    	PLAYER_2_WINS = 0;
-	    	if(isComputer)
-	    		disableComputer();
+	    	board.removeAll(board);
 	    } else {
 	    	gameResetButton.setEnabled(false);
 	    	gameResetButton.setVisible(false);
@@ -436,10 +432,15 @@ public class Model {
 	}
 	
 	public void setBestOf(int games) {
-		if(games % 2 != 0)
-			BEST_OF = BEST_OF_5;
-		else
-			BEST_OF = BEST_OF_3;
+		BEST_OF = games;
+	}
+	
+	public int getBestOf() {
+		return BEST_OF;
+	}
+	
+	public void resetBestOf() {
+		BEST_OF = 0;
 	}
 	
 	public void setComputer() {
@@ -454,7 +455,20 @@ public class Model {
 		return isComputer;
 	}
 	
+	public void setComputerFirst() {
+		isComputerFirst = true;
+	}
+	
+	public void setComputerSecond() {
+		isComputerFirst = false;
+	}
+	
+	public boolean isComputerFirst() {
+		return isComputerFirst;
+	}
+	
 	public boolean checkIfWinner() {
 		return winner;
 	}
+	
 }
