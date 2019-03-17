@@ -1,0 +1,29 @@
+*************************
+*      UPDATE LOG       *
+*************************
+
+March 16, 2019
+
+1. Game Over screen implemented
+	a. Option given for player to issue a rematch with same setup
+	b. Option given for player to return to Main Menu
+2. Implemented feature so that once a player takes majority wins in
+   the series (i.e. has 3 wins in a best of 5), the series ends
+   premeaturely. 
+	a. Player is taken to the Game Over screen where the winner is displayed
+3. Custom match setup implemented
+	a. Player has the option to input how many games they want to play
+	   in their match (USER IS UNABLE TO INPUT CHARS, 0, OR NEGATIVE VALUES)
+
+
+March 17, 2019
+
+1. Feature implemented allowing computer to make the first move if selected
+	a. After selecting "Play versus computer", player is prompted with
+	   2 buttons: 1 for allowing the computer to go first and the other
+	   for going second.
+	b. If computer is selected to go first, first move is issued during
+	   the new game event. This eliminates having to repeat lines of
+           code in the selection event and function as it had before with
+	   processing a player move and then a computer move (if applicable).
+
