@@ -10,6 +10,7 @@ public final class View extends JFrame{
 	//Used for determining the size of the display
 	 int maxX, maxY;
 	 
+	 //Each panel represents a different viewable screen
 	 CardLayout cardLayout = new CardLayout();
 	 JPanel cardPanel = new JPanel(cardLayout);
 	 JPanel gamePanel = new displayPanel();
@@ -30,6 +31,7 @@ public final class View extends JFrame{
 	 JLabel winnerLabel = new JLabel();
 	 JLabel gameOverLabel = new JLabel("GAME OVER");
 	 JLabel gameWinnerLabel = new JLabel();
+	 JLabel selectionLabel = new JLabel("Input the desired number of games");
 	 
 	 JFormattedTextField gameInputField;
 	 
@@ -194,6 +196,9 @@ public final class View extends JFrame{
 			gameInputField.setEditable(false);
 			gameInputField.setFocusLostBehavior(JFormattedTextField.PERSIST);
 			
+			selectionLabel.setVisible(false);
+			selectionLabel.setFont(new Font("Courier New", Font.BOLD, 36));
+			selectionLabel.setForeground(Color.RED);
 
 			//Set up the button layout
 			GridBagConstraints c = new GridBagConstraints();
@@ -220,6 +225,12 @@ public final class View extends JFrame{
 			c.ipady = 93;
 			c.insets = new Insets(-120,200,0,0);
 			startButtonPanel.add(customSelectButton,c);
+			
+			//Set up label for the input field display
+			c.ipadx = 0;
+			c.ipady = 0;
+			c.insets = new Insets(70,0,0,0);
+			startButtonPanel.add(selectionLabel,c);
 			
 					
 			//Add the title and buttons to the panel
@@ -284,7 +295,7 @@ public final class View extends JFrame{
 		}
 		
 		
-		//Create panel for the game over  game
+		//Create panel for the game over screen
 		public void createGameOverScreen() {
 			
 			//Inner panels for displaying the text and buttons

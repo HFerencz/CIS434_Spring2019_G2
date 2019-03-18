@@ -2,6 +2,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 
+/*************************
+ * Class for the O token *
+ *************************/
 public class Circle extends Shape{
 	private int radius;
 	private Point origin;

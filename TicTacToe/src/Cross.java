@@ -1,6 +1,9 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+/*************************
+ * Class for the X token *
+ *************************/
 public class Cross extends Shape{
 	private final int POINTS = 6;
 	private int[] xCoords = new int[POINTS];

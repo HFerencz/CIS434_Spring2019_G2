@@ -1,6 +1,9 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+/***************************************************
+ * Class for the lines that make up the game board *
+ ***************************************************/
 public class Line extends Shape {
 	private int x1,y1,x2,y2;
 	

@@ -17,6 +17,7 @@ public class Controller implements ActionListener, MouseListener{
 		this.model = model;		
 		}
 	
+	//Add event listeners for all buttons as well as the game board when player clicks
 	public void setActionListeners() {
 		view.gamePanel.addMouseListener(this);
 		view.versusPlayerButton.addActionListener(this);
@@ -34,6 +35,11 @@ public class Controller implements ActionListener, MouseListener{
 	
 	}
 	
+	/*
+	 * New game event: Executed once game settings are established. If playing against computer
+	 * 				   and computer is going first, handle computer's first move once board is
+	 * 				   created
+	 */
 	public void processNewGameEvent(int bestOfChoice) {
 		model.setBestOf(bestOfChoice);
 		model.newGameEvent(view.getBoardArray());
@@ -45,6 +51,16 @@ public class Controller implements ActionListener, MouseListener{
 		this.view.repaint();
 	}
 	
+	/*
+	 * Selection event: Order of events for each player making a move:
+	 * 		1. Determine if there has been a winner yet
+	 * 		2. Handle human player's selection event
+	 * 		3. Determine if there has been a winner yet
+	 * 		4. If no winner, change to the other player
+	 * 		5. If other player is computer, handle computer player's selection event
+	 * 		6. After computer makes its turn, determine if there has been a winner
+	 * 		7. At end of computer event, change current player back to the user
+	 */
 	public void processSelectionEvent(int xCoord, int yCoord) {
 		if(!model.checkIfWinner()) {
 			if (model.selectionEvent(xCoord, yCoord, view.getTokenArray())) {
@@ -62,10 +78,19 @@ public class Controller implements ActionListener, MouseListener{
 		}
 	}
 	
+	/*
+	 * Change player event: Event for switching players
+	 */
 	public void processChangePlayerEvent() {
 		model.changePlayerEvent();
 	}
 	
+	
+	/*
+	 * Winner event: Determine if there has been a winner. If so, determine if the last win
+	 * 	             determines the outcome of the series. If so, enable the Game Over button.
+	 * 				 Otherwise, enable the Next Game button.
+	 */
 	public boolean processWinnerEvent() {
 		
 		if(model.winnerEvent(view.winnerLabel, view.player1Wins, view.player2Wins)) {
@@ -82,17 +107,26 @@ public class Controller implements ActionListener, MouseListener{
 		return false;
 	}
 	
+	/*
+	 * Game reset event: Event for resetting the board for a fresh new game
+	 */
 	public void processGameResetEvent() {
 		model.gameReset(view.getTokenArray(), view.getBoardArray(), view.nextGameButton, view.gameOverButton, view.winnerLabel,
 				view.gameWinnerLabel, view.player1Wins, view.player2Wins);
 		this.view.repaint();
 	}
 	
+	/*
+	 * Play again event: Event for setting up a new match with previous settings. 
+	 */
 	public void processPlayAgainEvent() {
 		processNewGameEvent(model.getBestOf());
 		this.view.repaint();
 	}
 	
+	/*
+	 * Computer turn event: Event for deciding if the computer goes first or second
+	 */
 	public void processCompTurnEvent(int flag) {
 		if(flag == 1)
 			model.setComputerFirst();
@@ -118,10 +152,25 @@ public class Controller implements ActionListener, MouseListener{
 		
 		Object source = event.getSource();
 		
+		/*
+		 * BUTTON EVENT DESCRIPTIONS:
+		 * 
+		 * versusPlayerButton: both players are human users; change to number of matches screen
+		 * versusCompButton: other player is the computer; disable versus buttons, enable buttons for deciding comp's turn
+		 * compFirstButton: sets up computer for making the first move; change to number of matches screen
+		 * compSecondButton: sets up computer for going after the player; change to number of matches screen
+		 * bestof3Button: sets up match to be a best of 3 games; change to game screen
+		 * bestof5Button: sets up match to be a best of 5 games; change to game screen
+		 * customRangeButton: hide best of buttons, enable text field so the user can decide the number of games
+		 * customSelectButton: if valid user input, store in a variable for determining length of match; change to game screen
+		 * nextGameButton: reset the board for the next game, keeping track of each player's wins in-between matches
+		 * gameOverButton: reset game board but leaves best of and computer info untouched; change to game over screen
+		 * playAgainButton: set up a new match with previous settings intact; change to game screen
+		 * mainMenuButton: disable computer and clear best of variable; change to main menu screen
+		 */
 		if(source == view.versusPlayerButton) {
 			view.cardLayout.next(view.cardPanel);
-			view.repaintScreen();
-			
+			view.repaintScreen();	
 		}
 		else if(source == view.versusCompButton) {
 			model.setComputer();
@@ -186,6 +235,7 @@ public class Controller implements ActionListener, MouseListener{
 			view.gameInputField.setEditable(true);
 			view.customSelectButton.setVisible(true);
 			view.customSelectButton.setEnabled(true);
+			view.selectionLabel.setVisible(true);
 		}
 		else if(source == view.customSelectButton) {
 			if(view.gameInputField.getText().trim().length() != 0) {
@@ -202,6 +252,7 @@ public class Controller implements ActionListener, MouseListener{
 				view.gameInputField.setText(null);
 				view.customSelectButton.setVisible(false);
 				view.customSelectButton.setEnabled(false);
+				view.selectionLabel.setVisible(false);
 				view.cardLayout.next(view.cardPanel);
 				view.repaintScreen();
 			}	
@@ -232,7 +283,11 @@ public class Controller implements ActionListener, MouseListener{
 	}
 	
 	
-	
+	/*
+	 * MOUSE EVENT DESCRIPTIONS:
+	 * 
+	 * processSelectionEvent: Determine if the player made a valid selection on the game board
+	 */
 	
 	@Override
 	public void mouseClicked(MouseEvent event) {
