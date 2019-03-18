@@ -26,4 +26,5 @@ March 17, 2019
 	   the new game event. This eliminates having to repeat lines of
            code in the selection event and function as it had before with
 	   processing a player move and then a computer move (if applicable).
+2. Comments added
 
