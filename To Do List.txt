@@ -1,0 +1,4 @@
+1 - Add a go back to main menu button, (preferably in a corner)
+2 - Intellignet AI (knows when to win/block)
+3 - Fix the amount of games that can be entered into the text box.
+4 - Clean up the IU (Make it more Appealing)
