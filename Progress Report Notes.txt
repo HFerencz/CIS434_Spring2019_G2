@@ -1,0 +1,45 @@
+Difficulties encountered so far: Dealing with displaying both a game winner and a series winner to the 
+				 user without making the view too crowded. Issue amplified due to the
+				 limitation of using a 900x900 display and basing all of the current
+				 UI decisions around these dimensions. For example, enlarging the game
+				 screen would offset the position of the game board where it is 
+				 currently anchored.
+
+				 Clarifying what will make a "smart" AI 
+ 
+Solutions proposed/implemented:  Addition of a dedicated 'Game Over' Screen which will display the
+				 series winner to the user once the series has been decided. This option
+				 frees us to work with a fresh, clean panel and avoid confusion from
+				 otherwise putting both the game winner and the series winner on the
+				 same display
+
+				 A heirarchy of move choices for the AI was established. The AI must
+				 first determine if it is in a winning position and take advantage of 
+				 it. Otherwise, if it is in a losing position, it must try and block
+				 the player. Otherwise, use the current implementation of putting
+				 a piece in a random spot on the board.
+
+Changes to original design: User has a means of specifying the length of a series alongside the 
+			    the presets for a best-of-3 or best-of-5 game.
+				
+			    Addition of the dedicated 'Game Over' Screen
+				- Led to the proposition of new requirements such as a Main Menu button
+				  and a Rematch button. This way, if the players want to play the exact
+				  same series again, they don't first have to go back to the title screen
+				  and set up all the presets from the beginning.
+
+			
+			   Proposition for a RESET button if players wanted to redo the current match
+				- this could mean either undoing the last move or resetting the entire
+				  game; will require refinement
+				- Must be disabled if a match winner has been determined and re-enabled
+				  for the next match. This way, background counters aren't disrupted
+				  and the series can play out naturally without getting too hung up
+				  on a single game
+
+
+Project as a whole has moved out from the proof of concept and basic functional development stages.
+Current version includes all basic facets of a tic-tac-toe game including specifying series length,
+being able to play against a user or computer, being able to play the actual game and having a 
+winner determined. Progress towards the final version will include UI refinement and movement
+towards the development of a smarter AI system.
