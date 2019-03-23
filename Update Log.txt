@@ -38,3 +38,4 @@ March 22, 2019
 	a. Originally, if neither player had majority wins in the series (i.e. in a best of 3 neither has 2) and the series 
 	   extends to 3 games before either player wins, the series would be declared a TIE. This was fixed by adding a check 
 	   so that if the series does extend to the max amount of games, determine which player has more wins.
+3. Limited the # of games a player could manually input to the range 1-9
