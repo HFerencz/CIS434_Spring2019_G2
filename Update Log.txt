@@ -28,3 +28,13 @@ March 17, 2019
 	   processing a player move and then a computer move (if applicable).
 2. Comments added
 
+
+March 22, 2019
+
+1. UI Cleaned up 
+	a. Button layouts changed
+	b. Button text more readable
+2. Bug fixed in determining game winner
+	a. Originally, if neither player had majority wins in the series (i.e. in a best of 3 neither has 2) and the series 
+	   extends to 3 games before either player wins, the series would be declared a TIE. This was fixed by adding a check 
+	   so that if the series does extend to the max amount of games, determine which player has more wins.
