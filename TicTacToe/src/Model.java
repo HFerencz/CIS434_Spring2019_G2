@@ -444,8 +444,15 @@ public class Model {
 				gameWinnerLabel.setText("PLAYER 1 WINS");
 			else if(PLAYER_2_WINS > BEST_OF/2)
 				gameWinnerLabel.setText("PLAYER 2 WINS");
-			else if(GAMES == BEST_OF)
-				gameWinnerLabel.setText("TIE!");
+			else if(GAMES == BEST_OF) {
+				if(PLAYER_1_WINS > PLAYER_2_WINS)
+					gameWinnerLabel.setText("PLAYER 1 WINS");
+				else if(PLAYER_2_WINS > PLAYER_1_WINS)
+					gameWinnerLabel.setText("PLAYER 2 WINS");
+				else
+					gameWinnerLabel.setText("TIE!");
+					
+			}
 			else
 				return false;
 			return true;	

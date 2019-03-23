@@ -104,9 +104,9 @@ public final class View extends JFrame{
 			 *  compFirstButton: If pressed, computer makes the first move
 			 *  compSecondButton: If pressed, computer makes the second move
 			 */
-			versusPlayerButton = new JButton("Play versus player");
+			versusPlayerButton = new JButton("Player vs. Player");
 	        versusPlayerButton.setEnabled(true);
-	        versusCompButton = new JButton("Play versus computer");
+	        versusCompButton = new JButton("Player vs. Computer");
 	        versusCompButton.setEnabled(true);
 	        
 	        compFirstButton.setVisible(false);
@@ -114,17 +114,21 @@ public final class View extends JFrame{
 	        compSecondButton.setVisible(false);
 	        compSecondButton.setEnabled(false);
 	        
-			
+	        versusPlayerButton.setFont(new Font("Arial", Font.PLAIN, 40));
+	        versusCompButton.setFont(new Font("Arial", Font.PLAIN, 40));
+	        compFirstButton.setFont(new Font("Arial", Font.PLAIN, 40));
+	        compSecondButton.setFont(new Font("Arial", Font.PLAIN, 40));
 			
 			//Set up the button layout
 			GridBagConstraints c = new GridBagConstraints();
 			c.anchor = GridBagConstraints.CENTER;
 			c.gridx = 2;
 			c.ipady = 80;
-			c.ipadx = 80;
+			c.ipadx = 120;
+			c.insets = new Insets(-50,0,0,0);
 			startButtonPanel.add(versusPlayerButton, c);
 			startButtonPanel.add(compFirstButton,c);
-			c.insets = new Insets(50,0,0,0);
+			c.insets = new Insets(150,0,0,0);
 			c.ipadx = 60;
 			startButtonPanel.add(versusCompButton,c);
 			startButtonPanel.add(compSecondButton,c);
@@ -174,13 +178,19 @@ public final class View extends JFrame{
 			customSelectButton.setVisible(false);
 			customSelectButton.setEnabled(false);
 			
+			
+			bestOf3Button.setFont(new Font("Arial", Font.PLAIN, 40));
+			bestOf5Button.setFont(new Font("Arial", Font.PLAIN, 40));
+			customRangeButton.setFont(new Font("Arial", Font.PLAIN, 40));
+			customSelectButton.setFont(new Font("Arial", Font.PLAIN, 20));
+			
 			/*
 			 * Formatted text field for if the user decides to choose the number of games to play
 			 */
 		    MaskFormatter formatter = null;
 		    
 			try {
-				formatter = new MaskFormatter("*****");
+				formatter = new MaskFormatter("*");
 			} catch (ParseException e) {
 				
 				e.printStackTrace();
@@ -190,7 +200,7 @@ public final class View extends JFrame{
 		
 			gameInputField = new JFormattedTextField(formatter);
 			gameInputField.setPreferredSize(new Dimension(150,100));
-			gameInputField.setFont(new Font("Times New Roman", Font.BOLD, 30));
+			gameInputField.setFont(new Font("Times New Roman", Font.BOLD, 72));
 			gameInputField.setHorizontalAlignment(JTextField.CENTER);
 			gameInputField.setVisible(false);
 			gameInputField.setEditable(false);
@@ -205,11 +215,11 @@ public final class View extends JFrame{
 			c.anchor = GridBagConstraints.NORTH;
 			c.gridx = 2;
 			c.ipady = 80;
-			c.ipadx = 80;
-			c.insets = new Insets(100,0,0,0);
+			c.ipadx = 150;
+			c.insets = new Insets(80,0,0,0);
 			startButtonPanel.add(bestOf3Button, c);
 			c.insets = new Insets(80,0,0,0);
-			c.ipadx = 80;
+			c.ipadx = 150;
 			startButtonPanel.add(bestOf5Button,c);
 			c.insets = new Insets(80,0,0,0);
 			c.ipadx = 50;
@@ -222,7 +232,7 @@ public final class View extends JFrame{
 			c.insets = new Insets(0,-200,0,0);
 			startButtonPanel.add(gameInputField,c);
 			c.ipadx = 80;
-			c.ipady = 93;
+			c.ipady = 83;
 			c.insets = new Insets(-120,200,0,0);
 			startButtonPanel.add(customSelectButton,c);
 			
@@ -282,6 +292,10 @@ public final class View extends JFrame{
 		    winnerLabel.setVisible(false);
 		    gamePanel.add(winnerLabel,c);
 			
+		    
+		    nextGameButton.setFont(new Font("Arial", Font.PLAIN, 20));
+		    gameOverButton.setFont(new Font("Arial", Font.PLAIN, 20));
+		    
 			c.anchor = GridBagConstraints.SOUTH;
 			c.ipady = 50;
 			c.ipadx = 50;
@@ -327,6 +341,9 @@ public final class View extends JFrame{
 			playAgainButton.setEnabled(true);
 			mainMenuButton.setVisible(true);
 			mainMenuButton.setEnabled(true);
+
+			playAgainButton.setFont(new Font("Arial", Font.PLAIN, 40));
+			mainMenuButton.setFont(new Font("Arial", Font.PLAIN, 40));
 			
 			//Set up the button layout
 			c.gridx = 2;
@@ -334,7 +351,7 @@ public final class View extends JFrame{
 			c.ipadx = 100;
 			c.insets = new Insets(50,0,0,0);
 			gameOverButtonPanel.add(playAgainButton, c);
-			c.insets = new Insets(200,0,0,0);
+			c.insets = new Insets(250,0,0,0);
 			c.ipadx = 100;
 			gameOverButtonPanel.add(mainMenuButton,c);
 			
