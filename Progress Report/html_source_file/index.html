@@ -1,0 +1,135 @@
+<html>
+<div style="width:auto">
+<head>
+<title> CIS 434 Project Progress Report</title>
+<center><p><img src="CIS_434/html/images/CSU_Logo.jpg"width="11%"height="20%">
+
+<p><h1>EECS Department</h1>
+<p><h1>CIS 434 Software Engineering</h1>
+<p><h2>Group 2 Progress Report (Tic-Tac-Toe)</h2>
+<p><h2>Rostislav Donika, Hayden Ferencz, Nikhil Gorti   </h2> 
+</center>
+<h1> Executive Summary:  </h1>
+<p> Over the past month, the team had been tasked with designing a executable GUI allowing the user to play a game of tic-tac-toe both against the computer or another human player.<br>
+ Collectively, the group agreed to hone the focus of development toward iterative development using agile development methods. This way, emerging requirements could be<br>
+ implemented into the game as new versions, with each version providing new functionality or revisions of existing features. Up to this point, the team had developed two <br>
+ working versions of the project - Alpha 1 and Alpha 2, respectively. All versions have been cataloged for eventual documentation purposes.<br>
+
+The first version, Alpha 1 served as a prototype which included the base functionality for being able to play a game of tic-tac-toe. No respect had been given for allowing the <br>
+ user to specify the number of games they wanted to play and pre-determined series’ lengths were set to be played in entirety. A simple AI system had been developed in which <br>
+ the computer would be able to make random moves against the user. All in all, this version was used as a proof of concept and a stimulus for revisions and future requirements <br>
+ elicitation. Visualizations and more in-depth descriptions for this version are provided below.<br> <br>
+
+Alpha 2 sought to address some of the faults and left out requirements from Alpha 1. Difficulties at this point included dealing with displaying both a game winner and a series <br>
+winner to the user without making the view too crowded. This issue was amplified due to the limitation of using a 900 x 900 display and basing all of the current UI decisions around<br>
+these dimensions. For example, enlarging the game screen would offset the position of the game board where it is currently anchored. The proposed solution was to add a dedicated<br>
+ “Game Over” screen which freed the team to work with a fresh, clean panel and avoid confusion from otherwise putting both the game winner and series winner on the same panel. <br>
+ This solution was similarly reused for the new custom selection screen for game lengths to avoid mixing a buttons screen with a user input display. A full list of fixes and <br>
+ emergent issues along with visualizations for Alpha 2 are also provided.<br> <br>
+
+The project as a whole has moved out from the proof of concept and basic functional development stages. Progress towards the final version will include UI refinement and movement <br>
+towards the development of a smarter AI system. Anticipated difficulties include clarifying what will make a “smart” AI. The group plans to address this issue by developing a hierarchy <br>
+of move decisions for the AI so it understands what order it needs to consider its moves before taking an action.<br> <br>
+</p>
+<h1> Alpha 1: </h1>
+<p> This version of the tic-tac-toe project features a “Player vs Player” and a “Player vs Computer” button on the main menu screen with either allowing the user to issue a match <br>
+ against another human user or the computer, respectively. Selecting either choice will then allow you to select a Best of 3 or Best of 5 match. As of this implementation, the computer<br>
+will always make the second move and the entire series will be played out regardless if a winner can already be decided (i.e. in the case where Player 1 has 2 wins in a Best of 3 match,<br>
+the third match will still be played). When the winner of a match is declared - or in the event of a tie - the result is displayed directly above the game board. Once the series has concluded,<br>
+the button directly below the game board responsible for moving the player between games will change text and functionality, displaying the overall match winner and returning the user(s)<br>
+back to the Main Menu screen. Figures 1-3 illustrate the UI for each screen of the game.
+</p><br><br>
+
+<p><img src="CIS_434/html/images/Alpha 1 (1).png"width="30%"height="40%"></p>
+<p><b>Figure 1: Main Menu Screen With Opponent Selection Buttons.</b> </p>
+<p><img src="CIS_434/html/images/Alpha 1_2 (1).png"width="30%"height="40%"></p>
+<p><b>Figure 2: Best-of Series Screen With Match Selection Buttons.</b> </p>
+<p><img src="CIS_434/html/images/Alpha1_3 (1).png"width="30%"height="40%"></p>
+<p><b>Figure 3: Game Board After Match Has Been Played.</b> </p><br>
+
+<h2> Bugs/Issues that need to be addressed:</h2>
+<ol>
+	<b><li>Buttons and text must be optimized.</li></b>
+	<p>    - Currently the buttons and text are too small are are not easily read on smaller computer screens. We must work to develop a more appealing User Interface, which will include larger/cleaner buttons,<br>
+         	better text and fonts, and overall updated graphics. </p>
+	<b><li>AI must be made smarter</li></b>
+	<p> - The AI currently will not try to take advantage of a winning position or block the opponent if it is threatened with a loss. It will simply place a marker in a random available square/space.</p>
+	<b><li>Computer needs to have the ability to play first or second.</li></b>
+	<p> - Currently it always goes second</p>
+	<b><li>Need to add game over screen to clearly see who wins</li></b>
+	<p> - Computer needs to have the ability to play first or second</p>
+	<b><li>Series will always be played out even if a winner can already be declared.</li></b>
+	<p> - (i.e. in a best of 5, even if a player has 3 wins, the remaining 2 games will always be played)</p>
+	</ol><br>
+
+
+<h1> Alpha 2: </h1>
+<p>This version of the tic-tac-toe project features many improvements from the previously released version, Alpha 1. The user is now able to choose a custom<br>
+range of games to play via an input select screen after choosing whether it is a 2-player or player versus AI game. Regarding the AI, the computer is now able<br>
+to be selected to make the first move, though its piece placement remains random in this version. A series will now terminate early if either player takes<br>
+majority wins, and a game over screen has been implemented which displays the game winner in large font at the top of the screen. Two buttons have also been<br>
+added to the game over screen: a Play Again button which allows the user to repeat the previously set up match without having to re-select game options, and<br>
+a Main Menu button which simply returns the user back to the title screen. Figures 4-7 illustrate the changes made to existing game screens, as well as the <br>
+implementation of the new custom game select and game over screens.</p><br><br>
+
+
+<p><img src="CIS_434/html/images/alpha_2_1 (1).png"width="30%"height="40%"></p>
+<p><b>Figure 4: New Game Selection Screen On Main Menus</b></p>
+<p><img src="CIS_434/html/images/alpha2_2 (1).png"width="30%"height="40%"></p>
+<p><b>Figure 5: Custom Input Range Screen </b></p>
+<p><img src="CIS_434/html/images/Screenshot_1 (1).png"width="30%"height="40%"></p>
+<p><b>Figure 6: Computer Able To Make First Or Second Move</b></p>
+<p><img src="CIS_434/html/images/alpha2 (1).png"width="30%"height="40%"></p>
+<p><b>Figure 7: Game Over Screen</b></p><br>
+
+<h2> Bugs/Issues that need to be addressed:</h2>
+<ol>
+	<b><li>Cleaning up the panels of the user interface.</li></b>
+	<p> - Currently the text and buttons are too small and are hard to see on smaller computer screens.</p>
+	<b><li>AI must be made smarter</li></b>
+	<p> - The AI currently will not try to take advantage of a winning position or block the opponent from winning; it will simply randomly place a marker in an available square.</p>
+	<b><li>Limit the number of games that the user can choose to select</li></b>
+	<p> - Currently it is possible to select up to 99999 games via custom range. This must be limited to a realistic number of games. </p>
+	</ol><br>
+
+
+<h1> Team member contributions: </h1>
+<h2> Rostislav Donika: </h2>
+<h3> Main Role: Team Organizer / Bug Tester </h3>
+<ul>
+	<li>Organized Team Meetings</li>
+	<li>Wrote Progress Report</li>
+	<li>Devised design implementation for custom range screen</li>
+	<li>Bug Testing</li>
+	<li>Assisting in UI cleanup
+	</ul>
+<h2> Hayden Ferencz: </h2>
+<h3> Main Role: Head Developer / Team Leader </h3>
+<ul>
+	<li>Developed Model-View-Controller architecture</li>
+	<li>Implemented title screens</li>
+	<li>Implemented game board and game board logic</li>
+	<li>Developed simple AI system</li>
+	<li>Developed early termination feature</li>
+	</ul>
+<h2> Nikhil Gorti: </h2>
+<h3> Main Role: Designer / Visual Aid Assistant </h3>
+<ul>
+	<li>Bug Testing</li>
+	<li>Assisting in UI cleanup</li>
+	<li>Requirements checking and validation</li>
+	<li>Implemented ‘Game Over’ Screen design</li>
+	<li>Working out move hierarchy for "Smart" AI</li>
+	</ul>
+</head>
+<body>
+
+
+
+                
+                    
+                                           
+</h3>
+</div>
+</body>
+</html>
