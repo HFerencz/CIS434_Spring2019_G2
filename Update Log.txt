@@ -45,8 +45,8 @@ March 26, 2019
 
 1. Smart AI Added
 	a. AI first checks if it is in a position to win (i.e. within a row/column/diagonal, the computer has 2 of 
-	its pieces in a row/column/diagonal and the 3rd spot is blank.) If so, its next move will be a winning one. Otherwise, the 
-	AI similarly checks if it is in a losing position (same concept except it's 2 of the user's pieces in a row) and will
-	attempt to block the user from winning. Otherwise, the AI will put a random piece down.
+	its pieces in a row/column/diagonal and the 3rd spot is blank.) If so, its next move will be a winning one. 
+	Otherwise, the AI similarly checks if it is in a losing position (same concept except it's 2 of the user's pieces 
+	in a row) and will attempt to block the user from winning. Otherwise, the AI will put a random piece down.
 2. Fixed a bug where if the user chooses the AI to go first, the AI will only go first for the first game of the series and then 
 second for the remaining games
