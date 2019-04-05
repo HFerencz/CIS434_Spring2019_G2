@@ -16,7 +16,7 @@ public class Model {
 	private final int BOX1 = 0, BOX2 = 1, BOX3 = 2, BOX4 = 3, BOX5 = 4, BOX6 = 5, BOX7 = 6, BOX8 = 7, BOX9 = 8;
 	
 	private int CURRENT_PLAYER = 1;
-	private int TURNS = 0;
+	int TURNS = 0;
 	private int BEST_OF = 0, GAMES = 0;
 	private int PLAYER_1_WINS = 0, PLAYER_2_WINS = 0;
 	
@@ -224,13 +224,36 @@ public class Model {
 		
 		int posWhereStored = -1;
 		boolean selection = false;
+		boolean winCheck = false;
 		
+		//If computer can win it will try to win
+		if((posWhereStored = checkComputerRows('O')) == -1) 
+			if((posWhereStored = checkComputerCols('O')) == -1) 
+				posWhereStored = checkComputerDiags('O');
+		
+		if(posWhereStored != -1)
+			winCheck = true;
+		
+		
+		//If computer can't win but it is in danger of losing, it will
+		//try and block
+		if(!winCheck) {
+			if((posWhereStored = checkComputerRows('X')) == -1) 
+				if((posWhereStored = checkComputerCols('X')) == -1) 
+					posWhereStored = checkComputerDiags('X');
+		}
 		
 		while(!selection) {
-			Random r = new Random();
-			int low = BOX1;
-			int high = BOX9+1;
-			int result = r.nextInt(high-low);
+			int result = posWhereStored;
+			
+			//If computer not in danger of losing and it cannot win yet, put a piece
+			//randomly
+			if(result == -1) {
+				Random r = new Random();
+				int low = BOX1;
+				int high = BOX9+1;
+			    result = r.nextInt(high-low);
+			}
 			
 			switch(result) {
 			case BOX1: 
@@ -419,6 +442,8 @@ public class Model {
 		return false;
 	}
 	
+	
+	
 	/*
 	 * checkDiags: Check the diagonals of the game board for a winner
 	 */
@@ -430,6 +455,74 @@ public class Model {
 		else if(tokenArray[2][0] == tokenArray[1][1] && tokenArray[1][1] == tokenArray[0][2])
 			return true;
 		return false;
+	}
+	
+	/*
+	 * checkComputerRows: Computer checks rows for if there is a pressing move for it to make
+	 */
+	public int checkComputerRows(char piece) {
+		int noPosition = -1;
+	
+		
+		for(int i = 0; i < ROWS; i++) {
+			if((!isContainedArray[BOX3 + 3*i] && isContainedArray[BOX2+ 3*i] && isContainedArray[BOX1+ 3*i]) 
+					 && tokenArray[i][BOX1] == piece && tokenArray[i][BOX2] == piece)
+				return BOX3+ 3*i;
+			else if((!isContainedArray[BOX2+ 3*i] && isContainedArray[BOX1+ 3*i] && isContainedArray[BOX3+ 3*i]) 
+					 && tokenArray[i][BOX1] == piece && tokenArray[i][BOX3] == piece)
+				return BOX2 + 3*i;
+			else if((!isContainedArray[BOX1+ 3*i] && isContainedArray[BOX2+ 3*i] && isContainedArray[BOX3+ 3*i]) 
+					 && tokenArray[i][BOX2] == piece && tokenArray[i][BOX3] == piece)
+				return BOX1 + 3*i;
+		}
+		return noPosition;
+	}
+	
+	/*
+	 * checkComputerCols: Computer checks columns for if there is a pressing move for it to make
+	 */
+	public int checkComputerCols(char piece) {
+		int noPosition = -1;
+	
+		for(int i = 0; i < COLS; i++) {
+			if((!isContainedArray[BOX7+i] && isContainedArray[BOX1+i] && isContainedArray[BOX4+i]) 
+					 && tokenArray[BOX1][i] == piece && tokenArray[BOX2][i] == piece)
+				return BOX7+i;
+			else if((!isContainedArray[BOX4+i] && isContainedArray[BOX1+i] && isContainedArray[BOX7+i]) 
+					 && tokenArray[BOX1][i] == piece && tokenArray[BOX3][i] == piece)
+				return BOX4+i;
+			else if((!isContainedArray[BOX1+i] && isContainedArray[BOX4+i] && isContainedArray[BOX7+i]) 
+					 && tokenArray[BOX2][i] == piece && tokenArray[BOX3][i] == piece)
+				return BOX1+i;
+		}
+		return noPosition;
+	}
+	
+	/*
+	 * checkComputerDiags: Computer checks diagonals for if there is a pressing move for it to make
+	 */
+	public int checkComputerDiags(char piece) {
+		int noPosition = -1;
+	
+		if((!isContainedArray[BOX1] && isContainedArray[BOX5] && isContainedArray[BOX9])
+			&& tokenArray[1][1] == piece && tokenArray[2][2] == piece)
+			return BOX1;
+		else if((!isContainedArray[BOX5] && isContainedArray[BOX1] && isContainedArray[BOX9])
+				&& tokenArray[0][0] == piece && tokenArray[2][2] == piece)
+				return BOX5;
+		else if((!isContainedArray[BOX9] && isContainedArray[BOX1] && isContainedArray[BOX5])
+				&& tokenArray[0][0] == piece && tokenArray[1][1] == piece)
+				return BOX9;
+		else if((!isContainedArray[BOX3] && isContainedArray[BOX5] && isContainedArray[BOX7])
+				&& tokenArray[1][1] == piece && tokenArray[2][0] == piece)
+				return BOX3;
+		else if((!isContainedArray[BOX5] && isContainedArray[BOX3] && isContainedArray[BOX7])
+				&& tokenArray[0][2] == piece && tokenArray[2][0] == piece)
+				return BOX5;
+		else if((!isContainedArray[BOX7] && isContainedArray[BOX3] && isContainedArray[BOX5])
+				&& tokenArray[0][2] == piece && tokenArray[1][1] == piece)
+				return BOX7;
+		return noPosition;
 	}
 	
 	/*
@@ -465,12 +558,14 @@ public class Model {
 	 */
 	public void gameReset(ArrayList<Shape> tokens, ArrayList<Shape> board, JButton gameResetButton, JButton gameOverButton, 
 			JLabel winnerLabel, JLabel gameWinnerLabel, JLabel player1Wins, JLabel player2Wins) {
+			
 		CURRENT_PLAYER = 1;
 		TURNS = 0;
 		tokens.removeAll(tokens);
 		isContainedArray = new boolean[MAX_SHAPES];
 	    tokenArray = new Character[ROWS][COLS];
 	    winner = false;
+	    
 	    if(gameOverEvent(gameWinnerLabel)) {
 	    	gameOverButton.setEnabled(false);
 	    	gameOverButton.setVisible(false);

@@ -43,11 +43,7 @@ public class Controller implements ActionListener, MouseListener{
 	public void processNewGameEvent(int bestOfChoice) {
 		model.setBestOf(bestOfChoice);
 		model.newGameEvent(view.getBoardArray());
-		if(model.getComputer() && model.isComputerFirst()) {
-			processChangePlayerEvent();
-			model.computerSelectionEvent(view.getTokenArray());
-			processChangePlayerEvent();
-		}
+		processCompGoesEvent();
 		this.view.repaint();
 	}
 	
@@ -125,13 +121,26 @@ public class Controller implements ActionListener, MouseListener{
 	}
 	
 	/*
-	 * Computer turn event: Event for deciding if the computer goes first or second
+	 * Computer turn order event: Event for deciding if the computer goes first or second
 	 */
-	public void processCompTurnEvent(int flag) {
+	public void processCompTurnOrderEvent(int flag) {
 		if(flag == 1)
 			model.setComputerFirst();
 		else
 			model.setComputerSecond();
+	}
+	
+	
+	/*
+	 * Computer moves event: Event for letting the computer make its move
+	 */
+	public void processCompGoesEvent() {
+		if(model.getComputer() && model.isComputerFirst()) {
+			processChangePlayerEvent();
+			model.computerSelectionEvent(view.getTokenArray());
+			processChangePlayerEvent();
+		}
+		
 	}
 	
 	
@@ -186,7 +195,7 @@ public class Controller implements ActionListener, MouseListener{
 			view.repaintScreen();
 		}
 		else if(source == view.compFirstButton) {
-			this.processCompTurnEvent(1);
+			this.processCompTurnOrderEvent(1);
 			view.versusPlayerButton.setEnabled(true);
 			view.versusPlayerButton.setVisible(true);
 			view.versusCompButton.setEnabled(true);
@@ -200,7 +209,7 @@ public class Controller implements ActionListener, MouseListener{
 			view.repaintScreen();
 		}
 		else if(source == view.compSecondButton) {
-			this.processCompTurnEvent(0);
+			this.processCompTurnOrderEvent(0);
 			view.versusPlayerButton.setEnabled(true);
 			view.versusPlayerButton.setVisible(true);
 			view.versusCompButton.setEnabled(true);
@@ -260,6 +269,7 @@ public class Controller implements ActionListener, MouseListener{
 		
 		else if(source == view.nextGameButton) {
 			this.processGameResetEvent();
+			this.processCompGoesEvent();
 			view.repaintScreen();
 		} 
 		else if(source == view.gameOverButton) {
