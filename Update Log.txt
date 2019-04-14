@@ -50,3 +50,8 @@ March 26, 2019
 	block the user from winning. Otherwise, the AI will put a random piece down.
 2. Fixed a bug where if the user chooses the AI to go first, the AI will only go first for the first game of the series and then 
 second for the remaining games
+
+April 14, 2019
+1. Further UI clean up
+2. Title header and Game Over screen header replaced with custom images
+	a. Project refactored to load images in from separate folder included in project package
