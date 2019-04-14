@@ -1,6 +1,10 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 
@@ -18,7 +22,12 @@ public final class View extends JFrame{
 	 JPanel startPanel = new displayPanel();
 	 JPanel bestOfPanel = new displayPanel();
 	
-	 JButton versusPlayerButton, versusCompButton, bestOf3Button, bestOf5Button, customRangeButton, customSelectButton;
+	 JButton versusPlayerButton = new JButton("Player vs. Player");
+	 JButton versusCompButton = new JButton("Player vs. Computer");
+	 JButton bestOf3Button = new JButton("Best Of 3");
+	 JButton bestOf5Button = new JButton("Best Of 5");
+	 JButton customRangeButton = new JButton("Custom Range");
+	 JButton customSelectButton = new JButton("ENTER");
 	 JButton nextGameButton = new JButton("Next Game");
 	 JButton gameOverButton = new JButton("Game Over");
 	 JButton mainMenuButton = new JButton("MAIN MENU");
@@ -26,12 +35,16 @@ public final class View extends JFrame{
 	 JButton compFirstButton = new JButton("Computer Plays First");
 	 JButton compSecondButton = new JButton("Computer Plays Second");
 	 
+	 JLabel titleScreenTitleLabel = new JLabel();
+	 JLabel bestOfScreenTitleLabel = new JLabel();
 	 JLabel player1Wins = new JLabel("Wins: ");
 	 JLabel player2Wins = new JLabel("Wins: ");
 	 JLabel winnerLabel = new JLabel();
-	 JLabel gameOverLabel = new JLabel("GAME OVER");
+	 JLabel gameOverLabel = new JLabel();
 	 JLabel gameWinnerLabel = new JLabel();
 	 JLabel selectionLabel = new JLabel("Input the desired number of games");
+	 JLabel player1 = new JLabel("Player 1");
+	 JLabel player2 = new JLabel("Player 2");
 	 
 	 JFormattedTextField gameInputField;
 	 
@@ -51,6 +64,7 @@ public final class View extends JFrame{
 			this.maxX = maxX;
 			this.maxY = maxY;
 			
+			initImages();
 			createStartScreen();
 			createBestOfScreen();
 			createGameScreen();
@@ -74,6 +88,23 @@ public final class View extends JFrame{
 	        this.setVisible(true);	
 		}
 	
+		//Initialize all images to necessary JLabels;
+		public void initImages() {
+			BufferedImage titleImage = null;
+			BufferedImage gameOverImage = null;
+			ClassLoader loader = this.getClass().getClassLoader();
+		    try {
+				titleImage = ImageIO.read(loader.getResourceAsStream("Tic-Tac-Toe.png"));
+				gameOverImage = ImageIO.read(loader.getResourceAsStream("Game Over.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    titleScreenTitleLabel = new JLabel(new ImageIcon(titleImage));
+		    bestOfScreenTitleLabel = new JLabel(new ImageIcon(titleImage));
+		    gameOverLabel = new JLabel(new ImageIcon(gameOverImage));
+		    
+		}
 		
 		//Create panel for the start screen
 		public void createStartScreen() {
@@ -91,10 +122,8 @@ public final class View extends JFrame{
 		    JPanel startButtonPanel = new JPanel(new GridBagLayout());
 			
 			//Label displaying the title of the game
-			JLabel startTextLabel = new JLabel("Tic Tac Toe Game!");
-			startTextLabel.setFont(new Font("Courier New", Font.BOLD, 72));
-			startTextLabel.setForeground(Color.RED);
-			startTextPanel.add(startTextLabel);
+			
+			startTextPanel.add(titleScreenTitleLabel);
 			
 			
 			
@@ -104,9 +133,7 @@ public final class View extends JFrame{
 			 *  compFirstButton: If pressed, computer makes the first move
 			 *  compSecondButton: If pressed, computer makes the second move
 			 */
-			versusPlayerButton = new JButton("Player vs. Player");
 	        versusPlayerButton.setEnabled(true);
-	        versusCompButton = new JButton("Player vs. Computer");
 	        versusCompButton.setEnabled(true);
 	        
 	        compFirstButton.setVisible(false);
@@ -114,23 +141,25 @@ public final class View extends JFrame{
 	        compSecondButton.setVisible(false);
 	        compSecondButton.setEnabled(false);
 	        
-	        versusPlayerButton.setFont(new Font("Arial", Font.PLAIN, 40));
-	        versusCompButton.setFont(new Font("Arial", Font.PLAIN, 40));
-	        compFirstButton.setFont(new Font("Arial", Font.PLAIN, 40));
-	        compSecondButton.setFont(new Font("Arial", Font.PLAIN, 40));
+	        versusPlayerButton.setFont(new Font("Rockwell", Font.BOLD, 45));
+	        versusPlayerButton.setFocusPainted(false);
+	        versusCompButton.setFont(new Font("Rockwell", Font.BOLD, 45));
+	        compFirstButton.setFont(new Font("Rockwell", Font.BOLD, 45));
+	        compSecondButton.setFont(new Font("Rockwell", Font.BOLD, 45));
 			
 			//Set up the button layout
 			GridBagConstraints c = new GridBagConstraints();
 			c.anchor = GridBagConstraints.CENTER;
 			c.gridx = 2;
 			c.ipady = 80;
-			c.ipadx = 120;
+			c.ipadx = 100;
 			c.insets = new Insets(-50,0,0,0);
 			startButtonPanel.add(versusPlayerButton, c);
 			startButtonPanel.add(compFirstButton,c);
 			c.insets = new Insets(150,0,0,0);
-			c.ipadx = 60;
+			c.ipadx = 20;
 			startButtonPanel.add(versusCompButton,c);
+			c.ipadx = 40;
 			startButtonPanel.add(compSecondButton,c);
 			
 			//Add the title and buttons to the panel
@@ -155,10 +184,7 @@ public final class View extends JFrame{
 			JPanel startButtonPanel = new JPanel(new GridBagLayout());
 					
 			//Label displaying the title of the game
-			JLabel startTextLabel = new JLabel("Tic Tac Toe Game!");
-			startTextLabel.setFont(new Font("Courier New", Font.BOLD, 72));
-			startTextLabel.setForeground(Color.RED);
-			startTextPanel.add(startTextLabel);
+			startTextPanel.add(bestOfScreenTitleLabel);
 					
 					
 					
@@ -168,21 +194,17 @@ public final class View extends JFrame{
 			 *  customRangeButton: Allow user to decide the number of matches
 			 *  customSelectButton: Verify the custom number of matches the user has provided
 			 */
-			bestOf3Button = new JButton("Best Of 3");
 		    bestOf3Button.setEnabled(true);
-		    bestOf5Button = new JButton("Best Of 5");
 			bestOf5Button.setEnabled(true);	
-			customRangeButton = new JButton("Custom Range");
 			customRangeButton.setEnabled(true);
-			customSelectButton = new JButton("ENTER");
 			customSelectButton.setVisible(false);
 			customSelectButton.setEnabled(false);
 			
 			
-			bestOf3Button.setFont(new Font("Arial", Font.PLAIN, 40));
-			bestOf5Button.setFont(new Font("Arial", Font.PLAIN, 40));
-			customRangeButton.setFont(new Font("Arial", Font.PLAIN, 40));
-			customSelectButton.setFont(new Font("Arial", Font.PLAIN, 20));
+			bestOf3Button.setFont(new Font("Rockwell", Font.BOLD, 40));
+			bestOf5Button.setFont(new Font("Rockwell", Font.BOLD, 40));
+			customRangeButton.setFont(new Font("Rockwell", Font.BOLD, 40));
+			customSelectButton.setFont(new Font("Rockwell", Font.BOLD, 40));
 			
 			/*
 			 * Formatted text field for if the user decides to choose the number of games to play
@@ -207,7 +229,7 @@ public final class View extends JFrame{
 			gameInputField.setFocusLostBehavior(JFormattedTextField.PERSIST);
 			
 			selectionLabel.setVisible(false);
-			selectionLabel.setFont(new Font("Courier New", Font.BOLD, 36));
+			selectionLabel.setFont(new Font("Courier New", Font.BOLD, 40));
 			selectionLabel.setForeground(Color.RED);
 
 			//Set up the button layout
@@ -216,13 +238,13 @@ public final class View extends JFrame{
 			c.gridx = 2;
 			c.ipady = 80;
 			c.ipadx = 150;
-			c.insets = new Insets(80,0,0,0);
+			c.insets = new Insets(60,0,0,0);
 			startButtonPanel.add(bestOf3Button, c);
-			c.insets = new Insets(80,0,0,0);
+			c.insets = new Insets(60,0,0,0);
 			c.ipadx = 150;
 			startButtonPanel.add(bestOf5Button,c);
-			c.insets = new Insets(80,0,0,0);
-			c.ipadx = 50;
+			c.insets = new Insets(60,0,0,0);
+			c.ipadx = 35;
 			startButtonPanel.add(customRangeButton,c);
 			
 			//Set up input field layout
@@ -231,8 +253,8 @@ public final class View extends JFrame{
 			c.ipady = 20;
 			c.insets = new Insets(0,-200,0,0);
 			startButtonPanel.add(gameInputField,c);
-			c.ipadx = 80;
-			c.ipady = 83;
+			c.ipadx = 55;
+			c.ipady = 61;
 			c.insets = new Insets(-120,200,0,0);
 			startButtonPanel.add(customSelectButton,c);
 			
@@ -266,7 +288,6 @@ public final class View extends JFrame{
 		    c.insets = new Insets(0,10,0,0);
 		    c.weightx = 1.0;
 		    c.weighty = 1.0;
-		    JLabel player1 = new JLabel("Player 1");
 			player1.setFont(new Font("Courier New", Font.BOLD, 48));
 			gamePanel.add(player1,c);
 			
@@ -276,7 +297,6 @@ public final class View extends JFrame{
 			
 			c.anchor = GridBagConstraints.NORTHEAST;
 			c.insets = new Insets(0,0,0,10);
-			JLabel player2 = new JLabel("Player 2");
 			player2.setFont(new Font("Courier New", Font.BOLD, 48));
 			gamePanel.add(player2,c);
 			
@@ -286,20 +306,20 @@ public final class View extends JFrame{
 			
 	
 			c.anchor = GridBagConstraints.NORTH;
-			c.insets = new Insets(70,25,0,0);
-		    winnerLabel.setFont(new Font("Courier New", Font.BOLD, 40));
-		    winnerLabel.setForeground(Color.MAGENTA);
+			c.insets = new Insets(70,25,0,23);
+		    winnerLabel.setFont(new Font("Courier New", Font.BOLD, 50));
+		    winnerLabel.setForeground(new Color(153,0,253));
 		    winnerLabel.setVisible(false);
 		    gamePanel.add(winnerLabel,c);
 			
 		    
-		    nextGameButton.setFont(new Font("Arial", Font.PLAIN, 20));
-		    gameOverButton.setFont(new Font("Arial", Font.PLAIN, 20));
+		    nextGameButton.setFont(new Font("Rockwell", Font.BOLD, 30));
+		    gameOverButton.setFont(new Font("Rockwell", Font.BOLD, 30));
 		    
 			c.anchor = GridBagConstraints.SOUTH;
-			c.ipady = 50;
-			c.ipadx = 50;
-			c.insets = new Insets(0,0,20,0);
+			c.ipady = 40;
+			c.ipadx = 10;
+			c.insets = new Insets(0,0,10,-8);
 			nextGameButton.setEnabled(false);
 			nextGameButton.setVisible(false);
 			gamePanel.add(nextGameButton,c);
@@ -330,11 +350,11 @@ public final class View extends JFrame{
 		    c.weightx = 1.0;
 		    c.weighty = 1.0;
 		  
-			gameOverLabel.setFont(new Font("Courier New", Font.BOLD, 72));
 			gameOverTextPanel.add(gameOverLabel,c);
 			
-			c.insets = new Insets(100, 0, 0, 0);
-			gameWinnerLabel.setFont(new Font("Courier New", Font.BOLD, 60));
+			c.insets = new Insets(175, 0, 0, 0);
+			gameWinnerLabel.setFont(new Font("Cooper Black", Font.PLAIN,72));
+			gameWinnerLabel.setForeground(new Color(183,13,0));
 			gameOverTextPanel.add(gameWinnerLabel,c);
 			
 			playAgainButton.setVisible(true);
@@ -342,8 +362,8 @@ public final class View extends JFrame{
 			mainMenuButton.setVisible(true);
 			mainMenuButton.setEnabled(true);
 
-			playAgainButton.setFont(new Font("Arial", Font.PLAIN, 40));
-			mainMenuButton.setFont(new Font("Arial", Font.PLAIN, 40));
+			playAgainButton.setFont(new Font("Rockwell", Font.BOLD, 40));
+			mainMenuButton.setFont(new Font("Rockwell", Font.BOLD, 40));
 			
 			//Set up the button layout
 			c.gridx = 2;

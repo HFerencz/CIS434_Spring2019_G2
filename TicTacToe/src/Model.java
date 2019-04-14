@@ -394,7 +394,7 @@ public class Model {
 		if(TURNS >= 5) {
 			
 			if(checkRows() || checkCols() || checkDiags()) {
-				winnerLabel.setText("Player " + CURRENT_PLAYER + " wins!");
+				winnerLabel.setText("PLAYER " + CURRENT_PLAYER + " WINS");
 				winnerLabel.setVisible(true);
 				GAMES++;
 				if(CURRENT_PLAYER % 2 != 0) {
@@ -410,7 +410,7 @@ public class Model {
 				return true;
 			}
 			else if(TURNS == 9) {
-				winnerLabel.setText("Tie game!");
+				winnerLabel.setText("TIE GAME");
 				winnerLabel.setVisible(true);
 				GAMES++;
 				return true;
@@ -543,7 +543,7 @@ public class Model {
 				else if(PLAYER_2_WINS > PLAYER_1_WINS)
 					gameWinnerLabel.setText("PLAYER 2 WINS");
 				else
-					gameWinnerLabel.setText("TIE!");
+					gameWinnerLabel.setText("TIE");
 					
 			}
 			else
