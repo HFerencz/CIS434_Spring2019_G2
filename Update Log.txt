@@ -56,3 +56,6 @@ April 14, 2019
 1. Further UI clean up
 2. Title header and Game Over screen header replaced with custom images
 	a. Project refactored to load images in from separate folder included in project package
+3. Fixed font issue where different files for the same font on different platforms resulted in different
+   appearances of the same font.
+   	a. Added font files directly to resources folder and imported through the View class
