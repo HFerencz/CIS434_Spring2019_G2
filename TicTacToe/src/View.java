@@ -53,7 +53,7 @@ public final class View extends JFrame{
 	 private ArrayList<Shape> board = new ArrayList<Shape>(BOARD_LINES);
 	 private ArrayList<Shape> tokens = new ArrayList<Shape>(MAX_TOKENS);
 
-
+	 private Font Rockwell, CooperBlack;
 	 
 	 	//default constructor
 		public View(int maxX, int maxY) {
@@ -64,6 +64,15 @@ public final class View extends JFrame{
 			this.maxX = maxX;
 			this.maxY = maxY;
 			
+			try {
+				Rockwell = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("rockb.ttf"));
+				CooperBlack = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("Cooper Black Regular.ttf"));
+			} catch (FontFormatException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 			initImages();
 			createStartScreen();
 			createBestOfScreen();
@@ -141,11 +150,11 @@ public final class View extends JFrame{
 	        compSecondButton.setVisible(false);
 	        compSecondButton.setEnabled(false);
 	        
-	        versusPlayerButton.setFont(new Font("Rockwell", Font.BOLD, 45));
+	        versusPlayerButton.setFont(Rockwell.deriveFont(Font.BOLD, 45));
 	        versusPlayerButton.setFocusPainted(false);
-	        versusCompButton.setFont(new Font("Rockwell", Font.BOLD, 45));
-	        compFirstButton.setFont(new Font("Rockwell", Font.BOLD, 45));
-	        compSecondButton.setFont(new Font("Rockwell", Font.BOLD, 45));
+	        versusCompButton.setFont(Rockwell.deriveFont(Font.BOLD, 45));
+	        compFirstButton.setFont(Rockwell.deriveFont(Font.BOLD, 45));
+	        compSecondButton.setFont(Rockwell.deriveFont(Font.BOLD, 45));
 			
 			//Set up the button layout
 			GridBagConstraints c = new GridBagConstraints();
@@ -201,10 +210,10 @@ public final class View extends JFrame{
 			customSelectButton.setEnabled(false);
 			
 			
-			bestOf3Button.setFont(new Font("Rockwell", Font.BOLD, 40));
-			bestOf5Button.setFont(new Font("Rockwell", Font.BOLD, 40));
-			customRangeButton.setFont(new Font("Rockwell", Font.BOLD, 40));
-			customSelectButton.setFont(new Font("Rockwell", Font.BOLD, 40));
+			bestOf3Button.setFont(Rockwell.deriveFont(Font.BOLD, 40));
+			bestOf5Button.setFont(Rockwell.deriveFont(Font.BOLD, 40));
+			customRangeButton.setFont(Rockwell.deriveFont(Font.BOLD, 40));
+			customSelectButton.setFont(Rockwell.deriveFont(Font.BOLD, 40));
 			
 			/*
 			 * Formatted text field for if the user decides to choose the number of games to play
@@ -244,7 +253,7 @@ public final class View extends JFrame{
 			c.ipadx = 150;
 			startButtonPanel.add(bestOf5Button,c);
 			c.insets = new Insets(60,0,0,0);
-			c.ipadx = 35;
+			c.ipadx = 45;
 			startButtonPanel.add(customRangeButton,c);
 			
 			//Set up input field layout
@@ -253,8 +262,8 @@ public final class View extends JFrame{
 			c.ipady = 20;
 			c.insets = new Insets(0,-200,0,0);
 			startButtonPanel.add(gameInputField,c);
-			c.ipadx = 55;
-			c.ipady = 61;
+			c.ipadx = 62;
+			c.ipady = 58;
 			c.insets = new Insets(-120,200,0,0);
 			startButtonPanel.add(customSelectButton,c);
 			
@@ -313,8 +322,8 @@ public final class View extends JFrame{
 		    gamePanel.add(winnerLabel,c);
 			
 		    
-		    nextGameButton.setFont(new Font("Rockwell", Font.BOLD, 30));
-		    gameOverButton.setFont(new Font("Rockwell", Font.BOLD, 30));
+		    nextGameButton.setFont(Rockwell.deriveFont(Font.BOLD, 30));
+		    gameOverButton.setFont(Rockwell.deriveFont(Font.BOLD, 30));
 		    
 			c.anchor = GridBagConstraints.SOUTH;
 			c.ipady = 40;
@@ -353,7 +362,7 @@ public final class View extends JFrame{
 			gameOverTextPanel.add(gameOverLabel,c);
 			
 			c.insets = new Insets(175, 0, 0, 0);
-			gameWinnerLabel.setFont(new Font("Cooper Black", Font.PLAIN,72));
+			gameWinnerLabel.setFont(CooperBlack.deriveFont(Font.PLAIN, 72));
 			gameWinnerLabel.setForeground(new Color(183,13,0));
 			gameOverTextPanel.add(gameWinnerLabel,c);
 			
@@ -362,8 +371,8 @@ public final class View extends JFrame{
 			mainMenuButton.setVisible(true);
 			mainMenuButton.setEnabled(true);
 
-			playAgainButton.setFont(new Font("Rockwell", Font.BOLD, 40));
-			mainMenuButton.setFont(new Font("Rockwell", Font.BOLD, 40));
+			playAgainButton.setFont(Rockwell.deriveFont(Font.BOLD, 40));
+			mainMenuButton.setFont(Rockwell.deriveFont(Font.BOLD, 40));
 			
 			//Set up the button layout
 			c.gridx = 2;
@@ -372,7 +381,7 @@ public final class View extends JFrame{
 			c.insets = new Insets(50,0,0,0);
 			gameOverButtonPanel.add(playAgainButton, c);
 			c.insets = new Insets(250,0,0,0);
-			c.ipadx = 100;
+			c.ipadx = 110;
 			gameOverButtonPanel.add(mainMenuButton,c);
 			
 			//Add the title and buttons to the panel
