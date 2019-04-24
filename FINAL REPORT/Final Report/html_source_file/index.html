@@ -23,13 +23,13 @@
 	
 	Throughout development, the group produced 4 distinct versions of the project. Version 1 served as a prototype which included the base functionality for being able to play a game of<br> 
 	tic-tac-toe. No respect had been given for allowing the user to specify the number of games they wanted to play and pre-determined series’ lengths were set to be played in entirety.<br> 
-	A simple AI system had been developed in which computer would be able to make random moves against the user. All in all, this version was used as a proof of concept and a stimulus<br>
+	A simple AI system had been developed in which the computer would be able to make random moves against the user. All in all, this version was used as a proof of concept and a stimulus<br>
 	for revisions and future requirements elicitation. Version 2 sought to address some of the faults and left out requirements from Version 1, including adding a dedicated “Game Over”<br> 
 	screen which freed the team to work with a fresh, clean panel and avoid confusion from otherwise putting both the game winner and series winner on the same panel. This solution was<br>
 	similarly reused for the new custom selection screen for game lengths to avoid mixing a buttons screen with a user input display.<br> <br>
 	
 	Versions 3 and 4 were largely tied together in that each introducted additional functionality for the AI. The computer was allowed the option to go first as specified by the user.<br>
-	Move logic had also been considered during this phase of development. The random nature of the computer's was replaced with "Smart" AI capabilities so moves could be chosen more<br>
+	Move logic had also been considered during this phase of development. The random nature of the computer was replaced with "Smart" AI capabilities so moves could be chosen more<br>
 	thoughtfully. For instance, the computer would specifically try to win if it had 2 pieces in a given row, column or diagonal and the third space being vacant. Similarly, it would<br>
 	try and block the player if they were a move from victory. Bug fixes for the new computer logic were addressed throughout Versions 3 and 4. On top of the logical changes, the final<br>
 	version saw a cleanup of the project's graphical UI. Custom images were made to replace existing screen headers, button text was enlarged and more appealing fonts were chosen for<br>
@@ -60,7 +60,7 @@
 
 <br>
 <p> The Model-View-Controller (MVC) architectural model was utilized for the development of the project. Under MVC, the core system is separated into 3 classes that handle the graphical<br>
-	UI setup, event handling and background logic inidvidually. Within the View, code of the initial build of the game screens and graphical object containers is located. All buttons,<br> 
+	UI setup, event handling and background logic inidvidually. Within the View, code for the initial build of the game screens and graphical object containers is created. All buttons,<br> 
 	text labels, display panels and frames are built, with initializations for visibility and responsiveness. Objects are displayed to the screen through the paint() function, which is <br>
 	recalled whenever logical changes affect the state of the UI. Inside the Controller, event listeners for the board and all buttons are registered. When the user interacts with the <br>
 	program, the corresponding event is triggered and the Controller passes any information into the Model from the View that is necessary for processing the event. The Model is tasked <br>
@@ -73,8 +73,8 @@
 
 
 <h1> Version 1: </h1>
-<p> This version of the tic-tac-toe project features a “Player vs Player” and a “Player vs Computer” button on the main menu screen with either allowing the user to issue a match <br>
- against another human user or the computer, respectively. Selecting either choice will then allow you to select a Best of 3 or Best of 5 match. When the winner of a match is<br>
+<p> This version of the tic-tac-toe project features a “Player vs Player” and a “Player vs Computer” button on the Main Menu screen with either allowing the user to issue a match <br>
+ against another human user or the computer, respectively. Selecting either choice will then allow you to select a best of 3 or best of 5 match. When the winner of a match is<br>
  declared - or in the event of a tie - the result is displayed directly above the game board. Once the series has concluded, the button directly below the game board responsible for moving<br>
  the player between games will change text and functionality, displaying the overall match winner and returning the user(s) back to the Main Menu screen. Figures 3-5 illustrate the UI for<br>
  each screen of the game.<br><br>
@@ -105,10 +105,10 @@
    select screen after choosing whether it is a 2-player or player versus computer game. Regarding the computer, it is now able to be selected to make the first move, though its piece <br>
    placement remains random in this version. A series will now terminate early if either player takes majority wins and properly displays the results in this case, or if neither player <br>
    has majority wins and the match is decided by a fewer number of games over a longer match period. For instance, if in a best of 5 the first four games are ties and Player 1 wins the <br>
-   last match. In addressing the clutter of displaying both sets of winner information on the game board, a game over screen has been implemented which displays the game winner in large<br> 
+   last match. In addressing the clutter of displaying both sets of winner information on the game board, a Game Over screen has been implemented which displays the game winner in large<br> 
    font at the top of the screen. Two buttons have also been added to this screen: a 'Play Again' button which allows the user to repeat the previously set up match without having to <br>
    re-select game options, and a 'Main Menu' button which simply returns the user back to the title screen. Figures 6-9 illustrate the changes made to existing game screens, as well as <br>
-   the implementation of the new custom game select and game over screens.<br><br>
+   the implementation of the new custom game select and Game Over screens.<br><br>
    </p>
 
 
@@ -129,23 +129,23 @@
 </p>
 
 <h1> Version 3 </h1>
-<p>This version saw the beginning of adding functionality to the computer's logic, as well as minor updates to the user interface. All buttons and button text were enlarged, eliminating much of the<br> 
-   unappealing whitespace on the game setup screens. The group implemented another setup screen dedicated for determining the move order of the computer as seen in Figure 10 below. <br>
-   Sequentially, this screen would then transition to the best-of selection screen. Shortly after release, the group found a bug showing that the logic for letting the computer play first would <br>
-   only apply to the first game in the series, after which the computer would always go second. This was an issue in the game reset event within the Model, where previously, game resets were <br>
-   based off of the player-versus-player logic and would always default to Player 1 for making the first move. A version hotfix was created, adding an event where between matches an event is <br>
-   called checking the computer's flag and turn order and allowing it to make the first move if both are true. A move heirarchy for the "Smart" AI was created, prioritizing victory and loss<br> 
-   aversion over random move making. This would see implementation in the final release of the game.<br><br>
+<p>This version saw the focus of development shift towards the computer's logic, as well as minor updates to the user interface. As seen in Figure 10, buttons and button text were enlarged, <br>
+   eliminating much of the unappealing whitespace on the game setup screens. Shortly after release, the group found a bug showing that the logic for letting the computer play first would only <br>
+   apply to the first game in the series, after which the computer would always go second. This was an issue in the game reset event within the Model, where previously, game resets were based <br>
+   off of the player-versus-player logic and would always default to Player 1 for making the first move. A version hotfix was created, adding an event called between matches that checks the <br>
+   computer's enabled and isFirst flags, allowing it to make the first move if both are true. A move heirarchy for the "Smart" AI was created, prioritizing victory and loss aversion over random move <br>
+   making. This would see implementation in the final release of the game. For the most part, this version served as an intermediary between previous versions and the remaining functionality to <br>
+   be added in to the final version.<br><br>
    </p>
-   
-<p><img src="CIS_434/html/images/ComputerTurnSelectionScreen.jpg"width="40%"height="60%"></p>
-<p><b>Figure 10: Computer Turn Selection Screen </b></p><br>
+  
+<p><img src="CIS_434/html/images/ButtonEnlargement.jpg"width="40%"height="60%"></p>
+<p><b>Figure 10: Enlarged Buttons and Text </b></p><br>  
 
 <h1> Final Version </h1>
 <p>Development of the final version saw significant changes to the graphical side of the user interface, as well as the implementation of a more robust "Smart" AI. Most of the <br>
    Courier New font used on the game screens was removed in favor of more full, eye-appealing fonts like Rockwell and Cooper Black. Colors were changed for text labels appearing<br> 
-   on the game board and game over screens in light of these changes. The team scrapped the title and game over header text altogether, opting to construct custom graphics that would <br>
-   appeal to the user. Examples of the UI changes and illustrations of the custom graphics are highlighted in the updated title and game over screens in Figures 11 and 12 below.<br> 
+   on the game board and Game Over screens in light of these changes. The team scrapped the Main Menu and Game Over header text altogether, opting to construct custom graphics that would <br>
+   appeal to the user. Examples of the UI changes and illustrations of the custom graphics are highlighted in the updated title and Game Over screens in Figures 11 and 12 below.<br> 
    After adjusting the font choices, the group ran into trouble when running on both a laptop and desktop machine. Though both had installation files for the new fonts, they were <br>
    appearing differently across both platforms. Difficulties then arose in establishing continuity in the program's appearance without requiring changes to be made to the platform itself.<br>
    The solution came by directly adding the font installation files to a resources folder kept within the project. The View would then instantiate 2 Font objects loaded from these files,<br> 
@@ -183,7 +183,7 @@
    of a winning position and avoid facing a loss when presented with an imperative decision. However, this algorithm still utilizes some of the randomness of the vanilla AI when<br>
    the current position is unclear. The group could try and implement the proper algorithm which first takes advantage of a threat situation (i.e. 2 in a row), followed by playing<br>
    a forking move creating two threats at once, taking the center if free, taking the corner opposite that which has been played by the opponent, taking any available empty corner<br>
-   and finally taking any empty square in that order. On top of this, the group may consider adding the choice for more lax difficulty settings making the game much more user<br>
+   and finally taking any empty square in that order. On top of this, the group may consider adding the option for more lax difficulty settings making the game much more user<br>
    friendly to younger audiences.<br><br>
    </p>
   
