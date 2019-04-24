@@ -26,18 +26,16 @@
 	A simple AI system had been developed in which the computer would be able to make random moves against the user. All in all, this version was used as a proof of concept and a stimulus<br>
 	for revisions and future requirements elicitation. Version 2 sought to address some of the faults and left out requirements from Version 1, including adding a dedicated “Game Over”<br> 
 	screen which freed the team to work with a fresh, clean panel and avoid confusion from otherwise putting both the game winner and series winner on the same panel. This solution was<br>
-	similarly reused for the new custom selection screen for game lengths to avoid mixing a buttons screen with a user input display.<br> <br>
+	similarly reused for the new custom selection screen for game lengths to avoid mixing a buttons screen with a user input display. Move order logic for the computer and a computer turn<br>
+	selection screen were also implemented during this phase of development.<br> <br>
 	
-	Versions 3 and 4 were largely tied together in that each introducted additional functionality for the AI. The computer was allowed the option to go first as specified by the user.<br>
-	Move logic had also been considered during this phase of development. The random nature of the computer was replaced with "Smart" AI capabilities so moves could be chosen more<br>
-	thoughtfully. For instance, the computer would specifically try to win if it had 2 pieces in a given row, column or diagonal and the third space being vacant. Similarly, it would<br>
-	try and block the player if they were a move from victory. Bug fixes for the new computer logic were addressed throughout Versions 3 and 4. On top of the logical changes, the final<br>
-	version saw a cleanup of the project's graphical UI. Custom images were made to replace existing screen headers, button text was enlarged and more appealing fonts were chosen for<br>
-	display on larger screens.<br><br>
-	
-	Looking forward, the group would aim to add to the portability and user-friendliness of the final version. One would consider this by allowing for rescaling of the project's executable<br>
-	file and difficulty adjustments to consider different player demographics. Full process/class diagrams and imagery of the system's architecture and functionality are provided below. A<br> 
-	fully-documented user manual is also included for supplimentary reading purposes. <br><br>
+	Versions 3 and 4 were largely tied together in that each introducted additional functionality for the AI. The random nature of the computer was replaced with "Smart" AI capabilities so <br>
+	moves could be chosen more  thoughtfully. For instance, the computer would specifically try to win if it had 2 pieces in a given row, column or diagonal and the third space being vacant.<br> 
+	Similarly, it would try and block the player if they were a move from victory. Bug fixes for the new computer logic were addressed throughout Versions 3 and 4. On top of the logical changes,<br> 
+	these versions saw a cleanup of the project's graphical UI. Custom images were made to replace existing screen headers, button text was enlarged and more appealing fonts were chosen for<br>
+	display on larger screens. Looking forward, the group would aim to add to the portability and user-friendliness of the final version. One would consider this by allowing for rescaling of the <br>
+	project's executable file and difficulty adjustments to consider different player demographics. Full process/class diagrams and imagery of the system's architecture and functionality are <br>
+	provided below. A fully-documented user manual is also included for supplimentary reading purposes. <br><br>
 </p>
 
 <h1>System Process Diagram</h1>
@@ -121,9 +119,9 @@
 <p><img src="CIS_434/html/images/alpha2 (1).png"width="40%"height="60%"></p>
 <p><b>Figure 9: Game Over Screen</b></p><br>
 
-<p>The addition of the custom input range screen sought to provide more user interaction with the game and the addition of the rematch functionality sought to make the project<br> 
+<p>The addition of the custom input range screen sought to provide more user interaction with the game and the addition of the rematch functionality aimed to make the project<br> 
   more closely mimic the rematch features in other online, two-player applications like card games and chess. The user could initially input up to 99999 games via custom range - a <br>
-  feature deemed unrealistic by the group, later being redacted to 9 games at max. Error handlers were added to the input bar and button to ensure that only a single, positive, nonzero <br>
+  feature deemed unrealistic by the group, later being reduced to 9 games at max. Error handlers were added to the input bar and button to ensure that only a single, positive, nonzero <br>
   integer could be entered. This version did not see any major UI overhauls and the group decided to leave this clean up until the end while work was done on adding logic to the computer,<br> 
   including the sequence of decisions meant to be carried out by the future "Smart" AI implementation.<br><br><br>
 </p>
