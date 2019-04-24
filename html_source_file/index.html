@@ -1,0 +1,237 @@
+<html>
+<div style="width:auto">
+<head>
+<title> CIS 434 Final Project Report</title>
+<center><p><img src="CIS_434/html/images/CSU_Logo.jpg"width="11%"height="20%">
+
+<p><h1>EECS Department</h1>
+<p><h1>CIS 434 Software Engineering</h1>
+<p><h2>Group 2 Final Project Report (Tic-Tac-Toe)</h2>
+<p><h2>Rostislav Donika, Hayden Ferencz, Nikhil Gorti   </h2> 
+</center>
+<h1> Executive Summary:  </h1>
+<p> Over the course of the semester, the team had been tasked with designing a executable GUI allowing the user to play a game of tic-tac-toe both against the computer or another<br>
+	human player. Collectively, the group agreed to hone the focus of development toward iterative development using agile development methods. This way, emerging requirements<br>
+	could be implemented into the game as new versions, with each version providing new functionality or revisions of existing features. Early versions could then function as prototypes,<br> 
+	which shaped the requirements elicitation for future UI changes and features. Alongside incremental delivery, the group focused on aspects of change tolerance and customer<br>
+    involvement. The project was developed utilizing Model-View-Controller (MVC) architecture, whose class system allowed for abstraction between the system's graphical UI and<br>
+	the background control logic which supported it. Separation of code in this manner allowed different functionalities to be changed independently of other features of the project.<br>
+	With regards to customers, previous experience in GUI implementation split the group members into 2 distinct roles - developer and customer. The developers were responsbile<br>
+	for the implementation of changes kept in a product backlog and documentation of the new code. The customer elicted new requirements from the perspective of an end-user. Because<br>
+	of the difference in perspective from the developer, the customers acted as informal bug testers through interaction with version prototypes. With this system, the group could<br>
+	simulate sending off functional versions to end-users for evaluation.<br> <br>
+	
+	Throughout development, the group produced 4 distinct versions of the project. Version 1 served as a prototype which included the base functionality for being able to play a game of<br> 
+	tic-tac-toe. No respect had been given for allowing the user to specify the number of games they wanted to play and pre-determined series lengths were set to be played in entirety.<br> 
+	A simple AI system had been developed in which the computer would be able to make random moves against the user. All in all, this version was used as a proof of concept and a stimulus<br>
+	for revisions and future requirements elicitation. Version 2 sought to address some of the faults and left out requirements from Version 1, including adding a dedicated “Game Over”<br> 
+	screen which freed the team to work with a fresh, clean panel and avoid confusion from otherwise putting both the game winner and series winner on the same panel. This solution was<br>
+	similarly reused for the new custom selection screen for game lengths to avoid mixing a buttons screen with a user input display. Move order logic for the computer and a computer turn<br>
+	selection screen were also implemented during this phase of development.<br> <br>
+	
+	Versions 3 and 4 were largely tied together in that each introducted additional functionality for the AI. The random nature of the computer was replaced with "Smart" AI capabilities so <br>
+	moves could be chosen more  thoughtfully. For instance, the computer would specifically try to win if it had 2 pieces in a given row, column or diagonal and the third space being vacant.<br> 
+	Similarly, it would try and block the player if they were a move from victory. Bug fixes for the new computer logic were addressed throughout Versions 3 and 4. On top of the logical changes,<br> 
+	these versions saw a cleanup of the project's graphical UI. Custom images were made to replace existing screen headers, button text was enlarged and more appealing fonts were chosen for<br>
+	display on larger screens. Looking forward, the group would aim to add to the portability and user-friendliness of the final version. One would consider this by allowing for rescaling of the <br>
+	project's executable file and difficulty adjustments to consider different player demographics. Full process/class diagrams and imagery of the system's architecture and functionality are <br>
+	provided below. A fully-documented user manual is also included for supplimentary reading purposes. <br><br>
+</p>
+
+<h1>System Process Diagram</h1>
+<p><img src="CIS_434/html/images/ProcessDiagram.jpg"width="70%"height="75%"></p>
+<p><b>Figure 1: Tic-Tac-Toe Process Diagram</b> </p><br>
+
+<p>The intended flow of events when interacting with the tic-tac-toe program are as follows. The user first selects their opponent to be either another human player or the computer itself.<br>
+   If the user selects the computer, they must then decide whether the computer will make its moves first or second. Following this selection or selecting another user as the opponent,<br>
+   the player then determines the match length, either by two predetermined ranges or through a custom input selection. The user will then play the game until either exhausting all the<br> 
+   games in the series without a winner, a player takes majority wins in the series, or if the outcome is determined by fewer games than is necessary for majority. The user will then observe <br>
+   the winner on the Game Over screen where they are prompted to either play again with the same setup or to return to the Main Menu. If the rematch is accepted, the user will play the same<br> 
+   series over again. If the rematch is rejected, the game resets and the user can customize a new match.<br><br>
+</p>   
+
+
+<h1> Model-View-Controller Architecture</h1>
+
+<p><img src="CIS_434/html/images/ClassDiagram.jpg"width="60%"height="75%"></p>
+<p><b>Figure 2: Class Diagram Of Project Architecture</b> </p>
+
+<br>
+<p> The Model-View-Controller (MVC) architectural model was utilized for the development of the project. Under MVC, the core system is separated into 3 classes that handle the graphical<br>
+	UI setup, event handling and background logic inidvidually. Within the View, code for the initial build of the game screens and graphical object containers is created. All buttons,<br> 
+	text labels, display panels and frames are built, with initializations for visibility and responsiveness. Objects are displayed to the screen through the paint() function, which is <br>
+	recalled whenever logical changes affect the state of the UI. Inside the Controller, event listeners for the board and all buttons are registered. When the user interacts with the <br>
+	program, the corresponding event is triggered and the Controller passes any information into the Model from the View that is necessary for processing the event. The Model is tasked <br>
+	with executing the logic associated to an event, which includes piece placement, determining a winner, resetting the game board and changing players. While the View is responsible for <br>
+	displaying objects to the screen, the tokens and game board are built within events in the Model, which is the class association as illustrated in Figure 2. The Model is also home to <br>
+	logic executed by the computer. By being able to create an abstraction of the system's UI and background control logic and further have functionality restricted to specific events, <br>
+	separate features of the project could be worked on without fear of compromising other functionality. Such architecture also helped with identifying faults in the code's logic by simply <br>
+	referring to specific events or event sequences where the logic is executed.<br><br>
+</p>
+
+
+<h1> Version 1: </h1>
+<p> This version of the tic-tac-toe project features a “Player vs Player” and a “Player vs Computer” button on the Main Menu screen with either allowing the user to issue a match <br>
+ against another human user or the computer, respectively. Selecting either choice will then allow you to select a best of 3 or best of 5 match. When the winner of a match is<br>
+ declared - or in the event of a tie - the result is displayed directly above the game board. Once the series has concluded, the button directly below the game board responsible for moving<br>
+ the player between games will change text and functionality, displaying the overall match winner and returning the user(s) back to the Main Menu screen. Figures 3-5 illustrate the UI for<br>
+ each screen of the game.<br><br>
+</p>
+
+<p><img src="CIS_434/html/images/Alpha 1 (1).png"width="40%"height="60%"></p>
+<p><b>Figure 3: Main Menu Screen With Opponent Selection Buttons</b> </p><br>
+<p><img src="CIS_434/html/images/Alpha 1_2 (1).png"width="40%"height="60%"></p>
+<p><b>Figure 4: Best-of Series Screen With Match Selection Buttons</b> </p><br>
+<p><img src="CIS_434/html/images/Alpha1_3 (1).png"width="40%"height="60%"></p>
+<p><b>Figure 5: Game Board After Match Has Been Played</b> </p><br>
+
+<p> There were two points of focus for this prototype during group meetings. First was the messiness and foreseen clutter of the current state of the user interface. Text and <br>
+	button sizes were too small and were not easily read on smaller computer screens. Much of the title and best-of screens went underutilized, with the game appearing 'uninviting'. <br>
+	One specific UI issue was in trying to figure out how to display the match winner to the user. Currently, whenever a player wins a game or if it ends in a tie, the result is<br> 
+	displayed above the game board as seen in Figure 5. However, the winner of the whole series is displayed as text on the small button present underneath the game screen following<br> 
+	completion of a game. The consensus among members was that this text was too unnoticable and would be easily missed. The difficultly then came from dealing with displaying both<br> 
+	a game winner and a series winner to the user without making the view too crowded. This issue was amplified due to the limitation of using a 900x900 display and basing all of <br>
+	the current UI decisions around these dimensions. For example, enlarging the game screen would offset the position of the game board where it is currently anchored. The team <br>
+	would have to explore different avenues, including implementation of another screen dedicated for determining the results of a series. The other point of focus was on game logic.<br> 
+	The computer always goes second and a series will always be played out even if a winner can already be declared. For instance, in a best of 5, even if a player has 3 wins, the<br> 
+	remaining 2 games will always be played. Such issues would be the focal point for the next iteration of the project.<br><br><br>
+	</p>
+
+
+<h1> Version 2: </h1>
+<p>This version of the tic-tac-toe project prioritized issues brought up in the Version 1 group meetings. The user is now able to choose a custom range of games to play via an input<br> 
+   select screen after choosing whether it is a 2-player or player versus computer game. Regarding the computer, it is now able to be selected to make the first move, though its piece <br>
+   placement remains random in this version. A series will now terminate early if either player takes majority wins and properly displays the results in this case, or if neither player <br>
+   has majority wins and the match is decided by a fewer number of games over a longer match period. For instance, if in a best of 5 the first four games are ties and Player 1 wins the <br>
+   last match. In addressing the clutter of displaying both sets of winner information on the game board, a Game Over screen has been implemented which displays the game winner in large<br> 
+   font at the top of the screen. Two buttons have also been added to this screen: a 'Play Again' button which allows the user to repeat the previously set up match without having to <br>
+   re-select game options, and a 'Main Menu' button which simply returns the user back to the title screen. Figures 6-9 illustrate the changes made to existing game screens, as well as <br>
+   the implementation of the new custom game select and Game Over screens.<br><br>
+   </p>
+
+
+<p><img src="CIS_434/html/images/alpha_2_1 (1).png"width="40%"height="60%"></p>
+<p><b>Figure 6: New Game Selection Screen On Main Menus</b></p><br>
+<p><img src="CIS_434/html/images/alpha2_2 (1).png"width="40%"height="60%"></p>
+<p><b>Figure 7: Custom Input Range Screen </b></p><br>
+<p><img src="CIS_434/html/images/Screenshot_1 (1).png"width="40%"height="60%"></p>
+<p><b>Figure 8: Computer Able To Make First Or Second Move</b></p><br>
+<p><img src="CIS_434/html/images/alpha2 (1).png"width="40%"height="60%"></p>
+<p><b>Figure 9: Game Over Screen</b></p><br>
+
+<p>The addition of the custom input range screen sought to provide more user interaction with the game and the addition of the rematch functionality aimed to make the project<br> 
+  more closely mimic the rematch features in other online, two-player applications like card games and chess. The user could initially input up to 99999 games via custom range - a <br>
+  feature deemed unrealistic by the group, later being reduced to 9 games at max. Error handlers were added to the input bar and button to ensure that only a single, positive, nonzero <br>
+  integer could be entered. This version did not see any major UI overhauls and the group decided to leave this clean up until the end while work was done on adding logic to the computer,<br> 
+  including the sequence of decisions meant to be carried out by the future "Smart" AI implementation.<br><br><br>
+</p>
+
+<h1> Version 3 </h1>
+<p>This version saw the focus of development shift towards the computer's logic, as well as minor updates to the user interface. As seen in Figure 10, buttons and button text were enlarged, <br>
+   eliminating much of the unappealing whitespace on the game setup screens. Shortly after release, the group found a bug showing that the logic for letting the computer play first would only <br>
+   apply to the first game in the series, after which the computer would always go second. This was an issue in the game reset event within the Model, where previously, game resets were based <br>
+   off of the player-versus-player logic and would always default to Player 1 for making the first move. A version hotfix was created, adding an event called between matches that checks the <br>
+   computer's enabled and isFirst flags, allowing it to make the first move if both are true. A move heirarchy for the "Smart" AI was created, prioritizing victory and loss aversion over random move <br>
+   making. This would see implementation in the final release of the game. For the most part, this version served as an intermediary between previous versions and the remaining functionality to <br>
+   be added in to the final version.<br><br>
+   </p>
+  
+<p><img src="CIS_434/html/images/ButtonEnlargement.jpg"width="40%"height="60%"></p>
+<p><b>Figure 10: Enlarged Buttons and Text </b></p><br>  
+
+<h1> Final Version </h1>
+<p>Development of the final version saw significant changes to the graphical side of the user interface, as well as the implementation of a more robust "Smart" AI. Most of the <br>
+   Courier New font used on the game screens was removed in favor of more full, eye-appealing fonts like Rockwell and Cooper Black. Colors were changed for text labels appearing<br> 
+   on the game board and Game Over screens in light of these changes. The team scrapped the Main Menu and Game Over header text altogether, opting to construct custom graphics that would <br>
+   appeal to the user. Examples of the UI changes and illustrations of the custom graphics are highlighted in the updated title and Game Over screens in Figures 11 and 12 below.<br> 
+   After adjusting the font choices, the group ran into trouble when running on both a laptop and desktop machine. Though both had installation files for the new fonts, they were <br>
+   appearing differently across both platforms. Difficulties then arose in establishing continuity in the program's appearance without requiring changes to be made to the platform itself.<br>
+   The solution came by directly adding the font installation files to a resources folder kept within the project. The View would then instantiate 2 Font objects loaded from these files,<br> 
+   ensuring that the program would look the same across platforms.<br><br>
+   </p>
+
+<p><img src="CIS_434/html/images/UpdatedTitleScreen.jpg"width="40%"height="60%"></p>
+<p><b>Figure 11: Updated Title Screen </b></p><br>
+<p><img src="CIS_434/html/images/UpdatedGameOverScreen.jpg"width="40%"height="60%"></p>
+<p><b>Figure 12: Updated Game Over Screen </b></p><br>
+
+<p>The actual "Smart" AI implementation was created based on a three-tier move heirarchy. First, the computer would check if it had two of its own pieces in any of the rows, columns or<br> 
+   diagonals with the remaining space being empty. If this is the case, the computer would mark that space for entry and would subsequently win the match. Second, the computer would <br>
+   prioritize loss aversion, similarly checking the game board for 2 of the user's tokens appearing in any row/column/diagonal with a vacant third spot. If so, this third spot would be marked <br>
+   for entry and the computer would avoid a loss. The way the user then beats the computer is by setting up a fork situation where the computer is threatened in 2 rows/columns/diagonals. Since it is<br> 
+   only able to place a single piece on its turn, it will only be able to block a single win condition, where the player can then win on their next turn. Similarly to how the game checks the game <br>
+   board for a winner, the computer is given custom row, column and diagonal searching methods, where instead of a flag being set in the event of 3 in a row, the exact grid space is returned where<br> 
+   the computer needs to make its move. If the computer is not in a position to win and it is not threatened anywhere on the game board, it will revert to its old logic and randomly place a piece <br>
+   in a vacant tile on the board. The user is still able to take advantage of this randomness in the early stages of the game, but the computer will now act more like a competent opponent when played.<br> 
+   Illustrations of the "Smart" AI's win prioritization and loss aversion can be viewed in Figures 13 and 14, respectively.<br><br>
+   </p>
+   
+<p><img src="CIS_434/html/images/ComputerWins.jpg"width="40%"height="60%"></p>
+<p><b>Figure 13: Computer Taking Advantage Of A Winning Position </b></p><br>
+<p><img src="CIS_434/html/images/ComputerBlocksPlayer.jpg"width="40%"height="60%"></p>
+<p><b>Figure 14: Computer Blocking The Player </b></p><br>
+
+
+
+<h1>Future Work</h1>
+<p>Provided with more time, the team would aim to allow the application to be resizable, with graphical components able to scale accordingly with the change in dimensions<br>
+   of the frame. This would provide flexibility in the way components are drawn to the screen as opposed to the fixed anchoring conducted during the project time period, and<br>
+   eliminate the need to adjust the user interface depending on the resolution of the screen where the application is run. The group may also consider the implementation of<br>
+   adjustable difficultly settings for the computer opponent and proper refinement of the system's "Smart" AI. Present implementation ensures that the computer will take advantage<br>
+   of a winning position and avoid facing a loss when presented with an imperative decision. However, this algorithm still utilizes some of the randomness of the vanilla AI when<br>
+   the current position is unclear. The group could try and implement the proper algorithm which first takes advantage of a threat situation (i.e. 2 in a row), followed by playing<br>
+   a forking move creating two threats at once, taking the center if free, taking the corner opposite that which has been played by the opponent, taking any available empty corner<br>
+   and finally taking any empty square in that order. On top of this, the group may consider adding the option for more lax difficulty settings making the game much more user<br>
+   friendly to younger audiences.<br><br>
+   </p>
+  
+
+   
+<h1>Supplimentary Material</h1> 
+ <a href="CIS_434/html/Tic Tac Toe Manual.pdf" target="_blank">Tic-Tac-Toe User Manual</a><br><br>
+
+
+<h1> Team member contributions: </h1>
+<h2> Rostislav Donika: </h2>
+<h3> Main Role: Team Organizer / Designer </h3>
+<ul>
+	<li>Organized Team Meetings</li>
+	<li>Wrote Progress Report</li>
+	<li>Devised design implementation for custom range screen</li>
+	<li>Bug Testing</li>
+	<li>Assisted in UI cleanup</li>
+	<li>Devised Title Screen and Game Over Screen graphics</li>
+	<li>Developed user manual following release of final version</li>
+	</ul>
+<h2> Hayden Ferencz: </h2>
+<h3> Main Role: Head Developer / Team Leader </h3>
+<ul>
+	<li>Developed Model-View-Controller architecture</li>
+	<li>Implemented title screens</li>
+	<li>Implemented game board and game board logic</li>
+	<li>Developed simple AI system</li>
+	<li>Devised "Smart" AI heirarchy</li>
+	<li>Developed "Smart" AI system</li>
+	<li>Developed early termination feature</li>
+	<li>Wrote Final Report</li>
+	</ul>
+<h2> Nikhil Gorti: </h2>
+<h3> Main Role: Customer / Visual Aid Assistant </h3>
+<ul>
+	<li>Bug Testing</li>
+	<li>Assisted in UI cleanup</li>
+	<li>Requirements checking and validation</li>
+	<li>Devised ‘Game Over’ Screen design</li>
+	</ul>
+</head>
+<body>
+
+
+
+                
+                    
+                                           
+</h3>
+</div>
+</body>
+</html>
