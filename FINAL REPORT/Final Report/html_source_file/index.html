@@ -60,7 +60,7 @@
 
 <br>
 <p> The Model-View-Controller (MVC) architectural model was utilized for the development of the project. Under MVC, the core system is separated into 3 classes that handle the graphical<br>
-	UI setup, event handling and background logic inidvidually. Within the View, code of the initial build of the game screens and graphical object containers is contained. All buttons,<br> 
+	UI setup, event handling and background logic inidvidually. Within the View, code of the initial build of the game screens and graphical object containers is located. All buttons,<br> 
 	text labels, display panels and frames are built, with initializations for visibility and responsiveness. Objects are displayed to the screen through the paint() function, which is <br>
 	recalled whenever logical changes affect the state of the UI. Inside the Controller, event listeners for the board and all buttons are registered. When the user interacts with the <br>
 	program, the corresponding event is triggered and the Controller passes any information into the Model from the View that is necessary for processing the event. The Model is tasked <br>
@@ -102,7 +102,7 @@
 
 <h1> Version 2: </h1>
 <p>This version of the tic-tac-toe project prioritized issues brought up in the Version 1 group meetings. The user is now able to choose a custom range of games to play via an input<br> 
-   select screen after choosing whether it is a 2-player or player versus AI game. Regarding the AI, the computer is now able to be selected to make the first move, though its piece <br>
+   select screen after choosing whether it is a 2-player or player versus computer game. Regarding the computer, it is now able to be selected to make the first move, though its piece <br>
    placement remains random in this version. A series will now terminate early if either player takes majority wins and properly displays the results in this case, or if neither player <br>
    has majority wins and the match is decided by a fewer number of games over a longer match period. For instance, if in a best of 5 the first four games are ties and Player 1 wins the <br>
    last match. In addressing the clutter of displaying both sets of winner information on the game board, a game over screen has been implemented which displays the game winner in large<br> 
@@ -129,10 +129,10 @@
 </p>
 
 <h1> Version 3 </h1>
-<p>This version saw the beginning of adding functionality to the AI's logic, as well as minor updates to the user interface. All buttons and button text were enlarged, eliminating much of the<br> 
+<p>This version saw the beginning of adding functionality to the computer's logic, as well as minor updates to the user interface. All buttons and button text were enlarged, eliminating much of the<br> 
    unappealing whitespace on the game setup screens. The group implemented another setup screen dedicated for determining the move order of the computer as seen in Figure 10 below. <br>
    Sequentially, this screen would then transition to the best-of selection screen. Shortly after release, the group found a bug showing that the logic for letting the computer play first would <br>
-   only apply to the first game in the series, after which the AI would always go second. This was an issue in the game reset event within the Model, where previously, game resets were <br>
+   only apply to the first game in the series, after which the computer would always go second. This was an issue in the game reset event within the Model, where previously, game resets were <br>
    based off of the player-versus-player logic and would always default to Player 1 for making the first move. A version hotfix was created, adding an event where between matches an event is <br>
    called checking the computer's flag and turn order and allowing it to make the first move if both are true. A move heirarchy for the "Smart" AI was created, prioritizing victory and loss<br> 
    aversion over random move making. This would see implementation in the final release of the game.<br><br>
@@ -160,7 +160,7 @@
 <p>The actual "Smart" AI implementation was created based on a three-tier move heirarchy. First, the computer would check if it had two of its own pieces in any of the rows, columns or<br> 
    diagonals with the remaining space being empty. If this is the case, the computer would mark that space for entry and would subsequently win the match. Second, the computer would <br>
    prioritize loss aversion, similarly checking the game board for 2 of the user's tokens appearing in any row/column/diagonal with a vacant third spot. If so, this third spot would be marked <br>
-   for entry and the computer would avoid a loss. The way the user then beats the AI is by setting up a fork situation where the computer is threatened in 2 rows/columns/diagonals. Since it is<br> 
+   for entry and the computer would avoid a loss. The way the user then beats the computer is by setting up a fork situation where the computer is threatened in 2 rows/columns/diagonals. Since it is<br> 
    only able to place a single piece on its turn, it will only be able to block a single win condition, where the player can then win on their next turn. Similarly to how the game checks the game <br>
    board for a winner, the computer is given custom row, column and diagonal searching methods, where instead of a flag being set in the event of 3 in a row, the exact grid space is returned where<br> 
    the computer needs to make its move. If the computer is not in a position to win and it is not threatened anywhere on the game board, it will revert to its old logic and randomly place a piece <br>
@@ -179,8 +179,8 @@
 <p>Provided with more time, the team would aim to allow the application to be resizable, with graphical components able to scale accordingly with the change in dimensions<br>
    of the frame. This would provide flexibility in the way components are drawn to the screen as opposed to the fixed anchoring conducted during the project time period, and<br>
    eliminate the need to adjust the user interface depending on the resolution of the screen where the application is run. The group may also consider the implementation of<br>
-   adjustable difficultly settings for the computer opponent. Present implementation ensures that the AI will take options that best suit its ability to win and hinder the chances<br>
-   of the player. Providing more lax rules for how the computer decides its moves depending on difficulty will make the project more friendly to younger audiences.<br><br>
+   adjustable difficultly settings for the computer opponent. Present implementation ensures that the computer will take options that best suit its ability to win and hinder the<br> 
+   chances of the player. Providing more lax rules for how the computer decides its moves depending on difficulty will make the project more friendly to younger audiences.<br><br>
    </p>
   
 
