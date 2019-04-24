@@ -164,7 +164,7 @@
    only able to place a single piece on its turn, it will only be able to block a single win condition, where the player can then win on their next turn. Similarly to how the game checks the game <br>
    board for a winner, the computer is given custom row, column and diagonal searching methods, where instead of a flag being set in the event of 3 in a row, the exact grid space is returned where<br> 
    the computer needs to make its move. If the computer is not in a position to win and it is not threatened anywhere on the game board, it will revert to its old logic and randomly place a piece <br>
-   in a vacant tile on the board. The user is still able to take advantage of this randomness in the early stages of the game, but the computer will now act like a competent opponent when played.<br> 
+   in a vacant tile on the board. The user is still able to take advantage of this randomness in the early stages of the game, but the computer will now act more like a competent opponent when played.<br> 
    Illustrations of the "Smart" AI's win prioritization and loss aversion can be viewed in Figures 13 and 14, respectively.<br><br>
    </p>
    
@@ -179,8 +179,12 @@
 <p>Provided with more time, the team would aim to allow the application to be resizable, with graphical components able to scale accordingly with the change in dimensions<br>
    of the frame. This would provide flexibility in the way components are drawn to the screen as opposed to the fixed anchoring conducted during the project time period, and<br>
    eliminate the need to adjust the user interface depending on the resolution of the screen where the application is run. The group may also consider the implementation of<br>
-   adjustable difficultly settings for the computer opponent. Present implementation ensures that the computer will take options that best suit its ability to win and hinder the<br> 
-   chances of the player. Providing more lax rules for how the computer decides its moves depending on difficulty will make the project more friendly to younger audiences.<br><br>
+   adjustable difficultly settings for the computer opponent and proper refinement of the system's "Smart" AI. Present implementation ensures that the computer will take advantage<br>
+   of a winning position and avoid facing a loss when presented with an imperative decision. However, this algorithm still utilizes some of the randomness of the vanilla AI when<br>
+   the current position is unclear. The group could try and implement the proper algorithm which first takes advantage of a threat situation (i.e. 2 in a row), followed by playing<br>
+   a forking move creating two threats at once, taking the center if free, taking the corner opposite that which has been played by the opponent, taking any available empty corner<br>
+   and finally taking any empty square in that order. On top of this, the group may consider adding the choice for more lax difficulty settings making the game much more user<br>
+   friendly to younger audiences.<br><br>
    </p>
   
 
